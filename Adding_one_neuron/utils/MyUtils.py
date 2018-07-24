@@ -21,9 +21,9 @@ import warnings
 warnings.filterwarnings("ignore")
 
 use_cuda = False
-os.environ["CUDA_VISIBLE_DEVICES"]="7"
+os.environ["CUDA_VISIBLE_DEVICES"]="5"
 if torch.cuda.is_available():
-    device = torch.cuda.device("cuda:7")
+    device = torch.cuda.device("cuda:5")
     use_cuda = True
 
 
@@ -80,7 +80,8 @@ class ExpLinear(nn.Module):
     def init_weigth(self, mean, std):
         for name, param in super(ExpLinear, self).named_parameters():
             param.data.normal_(mean, std)
-
+            if name == 'alpha.0.weight':
+                param.data.normal_(10, 1)
 
 # Apply transformation: [x1, x2, ..., xn-1, xn] -> [BA(x1), BA(x2), ..., BA(xn-1), exp(xn)]
 class AugActivation(nn.Module):
@@ -162,7 +163,8 @@ def train_strategy_STOCH(network, loss_func, optimizer, dataloader, reg_lambda):
             loss, reg_loss = loss_func(predict_y, correct_y, network, reg_lambda)
 
             losses_batch.append(get_pure(loss))
-            misscl_rate_batch.append((np.where(get_pure(predict_y) < 0, -1, 1) != get_pure(correct_y)).sum())
+            #misscl_rate_batch.append((np.where(get_pure(predict_y) < 0, -1, 1) != get_pure(correct_y)).sum())
+            misscl_rate_batch.append(0.)
 
             optimizer.zero_grad()
             loss.backward()
@@ -188,7 +190,8 @@ def test_strategy_STOCH(network, loss_func, optimizer, dataloader, reg_lambda):
             loss, reg_loss = loss_func(predict_y, correct_y, network, reg_lambda)
 
             losses_batch.append(get_pure(loss))
-            misscl_rate_batch.append((np.where(get_pure(predict_y) < 0, -1, 1) != get_pure(correct_y)).sum())
+            #misscl_rate_batch.append((np.where(get_pure(predict_y) < 0, -1, 1) != get_pure(correct_y)).sum())
+            misscl_rate_batch.append(0.)
 
     return list_mean(losses_batch), sum(misscl_rate_batch), get_pure(reg_loss)
 
@@ -213,6 +216,8 @@ def train_(network, loss_func,
         for epoch in range(epochs):
             if epoch == 0:
                 optimizer = torch.optim.Adam(network.parameters(), lr=learning_rate)
+                #optimizer = torch.optim.Adagrad(network.parameters(), lr=learning_rate)
+                #optimizer = torch.optim.SGD(network.parameters(), lr=learning_rate)
                 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, reinit_optim)
             scheduler.step()
 
@@ -280,6 +285,8 @@ def train_EXP(network, loss_func,
         for epoch in range(epochs):
             if epoch == 0:
                 optimizer = torch.optim.Adam(network.parameters(), lr=learning_rate)
+                #optimizer = torch.optim.Adagrad(network.parameters(), lr=learning_rate)
+                #optimizer = torch.optim.SGD(network.parameters(), lr=learning_rate)
                 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, reinit_optim)
             scheduler.step()
 
@@ -293,7 +300,8 @@ def train_EXP(network, loss_func,
             losses_test.append(loss)
             misscl_rate_test.append(misscl_rate)
 
-            alpha.append(network.get_alpha())
+            #alpha.append(network.get_alpha())
+            alpha.append(0.)
             reg_losses.append(reg_loss)
 
             sys.stdout.write(

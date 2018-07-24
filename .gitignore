@@ -1,5 +1,6 @@
-Adding_one_neuron/cifar-10-batches-py
-Adding_one_neuron/glove_embeddings
-Adding_one_neuron/LMDR
-Adding_one_neuron/processed*
-Adding_one_neuron/raw*
+Datasets/CIFAR/cifar-10-batches-py
+Datasets/glove_embeddings/glove*
+Datasets/LMRD/test
+Datasets/LMRD/train
+**/processed
+**/raw
