@@ -40,7 +40,7 @@ class SVGD():
             
             lnpgrad = lnprob(theta)
             # calculating the kernel matrix
-            kxy, dxkxy = self.svgd_kernel(theta, h = -1)  
+            kxy, dxkxy = self.svgd_kernel(theta, h = bandwidth)  
             grad_theta = (np.matmul(kxy, lnpgrad) + dxkxy) / x0.shape[0]  
             
             # adagrad 
