@@ -1,5 +1,5 @@
 # CIFAR Dataset
-
+ 
 * Test: ./test/test  10k files
 * Train: ./train/train/[neg/pos] 10k files if each class (*_MARK.txt)
 
