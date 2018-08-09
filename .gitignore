@@ -2,5 +2,7 @@ Datasets/CIFAR/cifar-10-batches-py
 Datasets/glove_embeddings/glove*
 Datasets/LMRD/test
 Datasets/LMRD/train
+Test Task/clock
+Test Task/crocodile
 **/processed
 **/raw
