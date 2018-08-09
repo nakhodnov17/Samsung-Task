@@ -76,7 +76,7 @@ class MNIST_Class_Selection(data.Dataset):
         self.target_transform = target_transform
         self.train = train  # training set or test set
         if class_nums is None:
-            self.class_nums = set(xrange(10))
+            self.class_nums = set(range(10))
         else:
             self.class_nums = class_nums
             self.raw_folder = self.raw_folder + '/' + str(self.class_nums)
