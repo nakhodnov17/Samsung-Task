@@ -915,17 +915,18 @@ class DistributionMover():
                 self.target_density = target_density
                 self.real_target_density = target_density
             else:
-                self.target_density = lambda x, *args, **kwargs: (
-                            0.3 * normal_density(self.n_dims, -2., 1., n_particles_second=True).unnormed_density(x,
-                                                                                                                 *args,
-                                                                                                                 **kwargs) +
-                            0.7 * normal_density(self.n_dims, 2., 1., n_particles_second=True).unnormed_density(x,
-                                                                                                                *args,
-                                                                                                                **kwargs))
-
-                self.real_target_density = lambda x, *args, **kwargs: (
-                            0.3 * normal_density(self.n_dims, -2., 1., n_particles_second=True)(x, *args, **kwargs) +
-                            0.7 * normal_density(self.n_dims, 2., 1., n_particles_second=True)(x, *args, **kwargs))
+                pass
+                # self.target_density = lambda x, *args, **kwargs: (
+                #             0.3 * normal_density(self.n_dims, -2., 1., n_particles_second=True).unnormed_density(x,
+                #                                                                                                  *args,
+                #                                                                                                  **kwargs) +
+                #             0.7 * normal_density(self.n_dims, 2., 1., n_particles_second=True).unnormed_density(x,
+                #                                                                                                 *args,
+                #                                                                                                 **kwargs))
+                #
+                # self.real_target_density = lambda x, *args, **kwargs: (
+                #             0.3 * normal_density(self.n_dims, -2., 1., n_particles_second=True)(x, *args, **kwargs) +
+                #             0.7 * normal_density(self.n_dims, 2., 1., n_particles_second=True)(x, *args, **kwargs))
 
                 # self.target_density = lambda x : (normal_density(self.n_dims, 0., 2., n_particles_second=True).unnormed_density(x))
 
