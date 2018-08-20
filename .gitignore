@@ -6,3 +6,5 @@ Test Task/clock
 Test Task/crocodile
 **/processed
 **/raw
+**/*.pth*
+*.pth*
