@@ -7,7 +7,8 @@ import errno
 import numpy as np
 import torch
 import codecs
-from utils import download_url
+
+from MyMNIST_utils import download_url
 
 
 def get_int(b):
