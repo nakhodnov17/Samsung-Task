@@ -1460,19 +1460,35 @@ setattr(nn.Sequential, "calc_log_prior", DistributionMover.calc_log_prior_net)
 
 def train(dm,
           dataloader_train, dataloader_test,
-          lr_str, start_epoch, end_epoch, n_epochs_save=20,
+          lr_str, start_epoch, end_epoch, n_epochs_save=20, n_epochs_log=1,
           move_theta_0=False, plot_graphs=True, verbose=False,
           checkpoint_file_name=None, plots_file_name=None, log_file_name=None,
-          n_warmup_epochs=16,
+          n_warmup_epochs=16, n_previous=10
           ):
+    ### Get all y_test in one tensor
+    y_test_all = torch.tensor([], dtype=torch.int64, device=device)
+    for _, y_test in dataloader_test:
+        y_test = y_test.to(device=device)
+        y_test_all = torch.cat([y_test_all, y_test.data.detach().clone()], dim=0)
+    ### WARNING: May be incorrect if output features of dm.net != n_classes
+    n_classes = len(dataloader_train.dataset.class_nums)
+
+    ### Train loss/accuracy
     train_losses = []
     train_accs = []
+    ### Test loss/accuracy
     test_losses = []
     test_accs = []
     ### Mean loss/accuracy from @n_warmup_epochs to current epoch
     test_losses_mean = []
     test_accs_mean = []
     predictions_test_cummulative = torch.zeros([1, 1], dtype=t_type, device=device)
+    ### Mean loss/accuracy from (current epoch - n_previous)  to current epoch
+    test_losses_mean_previous = []
+    test_accs_mean_previous = []
+    predictions_test_previous = torch.zeros([n_previous, y_test_all.shape[0], n_classes], dtype=t_type, device=device)
+    ### Index of 'oldest' element in predictions_test_previous
+    pointer_to_the_back = 0
 
     if log_file_name is not None:
         log_file = open(log_file_name, 'a')
@@ -1481,19 +1497,23 @@ def train(dm,
 
     try:
         for epoch in range(start_epoch, end_epoch):
+            epoch_since_start = epoch - start_epoch
+
+            ### One update of particles via all dataloader_train
             for X, y in dataloader_train:
                 X = X.double().to(device=device).view(X.shape[0], -1)
                 y = y.to(device=device)
                 burn_in_coeff = max(1. - (1. - 1.) / 20. * epoch, 1.)
                 dm.update_latent_net(h_type=0, kernel_type='rbf', p=None,
                                      X_batch=X, y_batch=y,
-                                     train_size=len(dataloader_train) * dataloader_train.batch_size,
+                                     train_size=len(dataloader_train.dataset),
                                      step_size=lr_str.step_size,
                                      move_theta_0=move_theta_0,
                                      burn_in=True, burn_in_coeff=burn_in_coeff,
                                      epoch=epoch
                                      )
 
+            ### Evaluate cross entropy and accuracy over dataloader_train
             train_loss = 0.
             train_acc = 0.
             for X_train, y_train in dataloader_train:
@@ -1505,13 +1525,13 @@ def train(dm,
 
                 train_loss -= torch.sum(torch.gather(net_pred, 1, y_train.view(-1, 1)))
                 train_acc += torch.sum(y_pred == y_train).float()
-            train_loss /= (len(dataloader_train) + 0.)
-            train_acc /= (len(dataloader_train) * dataloader_train.batch_size + 0.)
+            train_loss /= (len(dataloader_train.dataset) + 0.)
+            train_acc /= (len(dataloader_train.dataset) + 0.)
 
+            ### Evaluate cross entropy and accuracy over dataloader_test
             test_loss = 0.
             test_acc = 0.
             predictions_test_current = torch.tensor([], dtype=t_type, device=device)
-            y_test_all = torch.tensor([], dtype=torch.int64, device=device)
             for X_test, y_test in dataloader_test:
                 X_test = X_test.double().to(device=device).view(X.shape[0], -1)
                 y_test = y_test.to(device=device)
@@ -1519,57 +1539,89 @@ def train(dm,
                 ### Get output of net before Softmax, mean and log, Shape = [n_particles, batch_size, output_features]
                 net_pred_pure = dm.predict_net(X_test, inference=False)
                 net_pred_pure = torch.mean(torch.nn.Softmax(dim=2)(net_pred_pure), dim=0)
-                predictions_test_current = torch.cat([predictions_test_current, net_pred_pure.data.detach().clone()], dim=0)
-                y_test_all = torch.cat([y_test_all, y_test.data.detach().clone()], dim=0)
+                predictions_test_current = torch.cat([predictions_test_current, net_pred_pure.data.detach().clone()],
+                                                     dim=0)
 
                 net_pred = torch.log(net_pred_pure)
                 y_pred = torch.argmax(net_pred, dim=1)
 
                 test_loss -= torch.sum(torch.gather(net_pred, 1, y_test.view(-1, 1)))
                 test_acc += torch.sum(y_pred == y_test).float()
-            test_loss /= (len(dataloader_test) + 0.)
-            test_acc /= (len(dataloader_test) * dataloader_test.batch_size + 0.)
+            test_loss /= (len(dataloader_test.dataset) + 0.)
+            test_acc /= (len(dataloader_test.dataset) + 0.)
 
+            ### Evaluate cross entropy and accuracy over dataloader_test using
+            ### all predictions from previous (@epoch_since_start - @n_warmup_epochs) epochs
             test_loss_mean = 0.
             test_acc_mean = 0.
-            if epoch >= n_warmup_epochs:
-                print((epoch - n_warmup_epochs) / (epoch - n_warmup_epochs + 1.), 1. / (epoch - n_warmup_epochs + 1.))
+            if epoch_since_start >= n_warmup_epochs:
                 predictions_test_cummulative = (
-                        predictions_test_cummulative * (epoch - n_warmup_epochs) / (epoch - n_warmup_epochs + 1.) +
-                        predictions_test_current / (epoch - n_warmup_epochs + 1.))
+                        predictions_test_cummulative * (epoch_since_start - n_warmup_epochs) / (
+                            epoch_since_start - n_warmup_epochs + 1.) +
+                        predictions_test_current / (epoch_since_start - n_warmup_epochs + 1.))
                 log_predictions_test = torch.log(predictions_test_cummulative)
                 y_pred_all = torch.argmax(log_predictions_test, dim=1)
+
                 test_loss_mean = -torch.sum(torch.gather(log_predictions_test, 1, y_test_all.view(-1, 1)))
                 test_acc_mean = torch.sum(y_pred_all == y_test_all).float()
-                test_loss_mean /= (len(dataloader_test) + 0.)
-                test_acc_mean /= (len(dataloader_test) * dataloader_test.batch_size + 0.)
+                test_loss_mean /= (len(dataloader_test.dataset) + 0.)
+                test_acc_mean /= (len(dataloader_test.dataset) + 0.)
 
+            ### Evaluate cross entropy and accuracy over dataloader_test using
+            ### all predictions from previous @n_previous epochs
+            test_loss_mean_previous = 0.
+            test_acc_mean_previous = 0.
+            predictions_test_previous[pointer_to_the_back] = predictions_test_current
+            if pointer_to_the_back + 1 == n_previous:
+                pointer_to_the_back = 0
+            else:
+                pointer_to_the_back += 1
+            if epoch_since_start + 1 >= n_previous:
+                log_predictions_test = torch.log(torch.mean(predictions_test_previous, dim=0))
+                y_pred_all = torch.argmax(log_predictions_test, dim=1)
+                test_loss_mean_previous = -torch.sum(torch.gather(log_predictions_test, 1, y_test_all.view(-1, 1)))
+                test_acc_mean_previous = torch.sum(y_pred_all == y_test_all).float()
+                test_loss_mean_previous /= (len(dataloader_test.dataset) + 0.)
+                test_acc_mean_previous /= (len(dataloader_test.dataset) + 0.)
+
+            ### Append evaluated losses and accuracies
             train_losses.append(train_loss.data[0].cpu().numpy())
             train_accs.append(train_acc.data[0].cpu().numpy())
             test_losses.append(test_loss.data[0].cpu().numpy())
             test_accs.append(test_acc.data[0].cpu().numpy())
-            if epoch >= n_warmup_epochs:
+            if epoch_since_start >= n_warmup_epochs:
                 test_losses_mean.append(test_loss_mean.data[0].cpu().numpy())
                 test_accs_mean.append(test_acc_mean.data[0].cpu().numpy())
             else:
                 test_losses_mean.append(None)
                 test_accs_mean.append(None)
+            if epoch_since_start + 1 >= n_previous:
+                test_losses_mean_previous.append(test_loss_mean_previous.data[0].cpu().numpy())
+                test_accs_mean_previous.append(test_acc_mean_previous.data[0].cpu().numpy())
+            else:
+                test_losses_mean_previous.append(None)
+                test_accs_mean_previous.append(None)
 
-            if epoch % 1 == 0:
+            ### Print log into console and file
+            if epoch % n_epochs_log == 0:
                 sys.stdout.write(
                     ('\nEpoch {0}... \t Step Size {1:.3f}\t Kernel factor: {2:.3f}\t Burn-in Coeff: {3:.3f}' +
-                     '\nEmpirical Loss(Train/Test/Test (Mean)): {4:.3f}/{5:.3f}/{6:.3f}\t Accuracy(Train/Test/Test (Mean)): {7:.3f}/{8:.3f}/{9:.3f}\t'
+                     '\nEmpirical Loss (Train/Test/Test (Mean (All))/Test (Mean (n_prev))): {4:.3f}/{5:.3f}/{6:.3f}/{7:.3f}' +
+                     '\nAccuracy (Train/Test/Test (Mean (All))/Test (Mean (n_prev))): {8:.3f}/{9:.3f}/{10:.3f}/{11:.3f}\t'
                      ).format(epoch, lr_str.step_size, dm.h, dm.burn_in_coeff,
-                              train_loss, test_loss, test_loss_mean, train_acc, test_acc, test_acc_mean
+                              train_loss, test_loss, test_loss_mean, test_loss_mean_previous,
+                              train_acc, test_acc, test_acc_mean, test_acc_mean_previous
                               )
                 )
                 if log_file_name is not None:
                     log_file = open(log_file_name, 'a')
                     log_file.write(
                         ('\nEpoch {0}... \t Step Size {1:.3f}\t Kernel factor: {2:.3f}\t Burn-in Coeff: {3:.3f}' +
-                         '\nEmpirical Loss(Train/Test/Test (Mean)): {4:.3f}/{5:.3f}/{6:.3f}\t Accuracy(Train/Test/Test (Mean)): {7:.3f}/{8:.3f}/{9:.3f}\t'
+                         '\nEmpirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): {4:.3f}/{5:.3f}/{6:.3f}/{7:.3f}' +
+                         '\nAccuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): {8:.3f}/{9:.3f}/{10:.3f}/{11:.3f}\t'
                          ).format(epoch, lr_str.step_size, dm.h, dm.burn_in_coeff,
-                                  train_loss, test_loss, test_loss_mean, train_acc, test_acc, test_acc_mean
+                                  train_loss, test_loss, test_loss_mean, test_loss_mean_previous,
+                                  train_acc, test_acc, test_acc_mean, test_acc_mean_previous
                                   )
                     )
                     log_file.close()
@@ -1577,17 +1629,19 @@ def train(dm,
             if epoch % n_epochs_save == 0 and epoch > start_epoch and checkpoint_file_name is not None:
                 torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))
 
+            ### Update step_size
             lr_str.step()
-            gpu_profile(frame=sys._getframe(), event='line', arg=None)
+
     except KeyboardInterrupt:
         pass
     if plot_graphs:
-        print_plots([[train_losses, test_losses, test_losses_mean],
-                     [train_accs, test_accs, test_accs_mean]],
+        print_plots([[train_losses, test_losses, test_losses_mean, test_losses_mean_previous],
+                     [train_accs, test_accs, test_accs_mean, test_accs_mean_previous]],
                     [['Epochs', ''],
                      ['Epochs', '% * 1e-2']],
-                    [['Cross Entropy Loss (Train)', 'Cross Entropy Loss (Test)', 'Cross Entropy Loss (Test (Mean))'],
-                     ['Accuracy (Train)', 'Accuracy (Test)', 'Accuracy (Mean)']
+                    [['Cross Entropy Loss (Train)', 'Cross Entropy Loss (Test)', 'Cross Entropy Loss (Test (Mean))',
+                      'Cross Entropy Loss (Test (Mean (n_prev)))'],
+                     ['Accuracy (Train)', 'Accuracy (Test)', 'Accuracy (Mean)', 'Accuracy (Mean (n_prev))']
                      ],
                     plots_file_name
                     )
@@ -1595,4 +1649,5 @@ def train(dm,
         torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))
 
     if verbose:
-        return train_losses, test_losses, train_accs, test_accs
+        return (train_losses, test_losses, test_losses_mean, test_losses_mean_previous,
+                train_accs, test_accs, test_accs_mean, test_accs_mean_previous)

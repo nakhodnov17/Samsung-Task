@@ -24,19 +24,19 @@ Params:
     n_previous (int): specify number of epoch that loss/accuracy will be averaged over last @n_previous epochs
 """
 
-use_cuda =
-cuda_device_id =
+use_cuda = True
+cuda_device_id = 4
 dataset = 'MNIST'
 batch_size = 100
 net_arc = 'fc-18-14'
-n_particles =
-use_latent =
-n_hidden_dims =
-experiment_name =
-version =
-n_epochs =
+n_particles = 5
+use_latent = True
+n_hidden_dims = 700
+experiment_name = 'model_2'
+version = 0
+n_epochs = 200
 n_epochs_save = 20
 n_epochs_log = 1
-move_theta_0 =
-n_warmup_epochs =
-n_previous =
+move_theta_0 = True
+n_warmup_epochs = 10
+n_previous = 6
