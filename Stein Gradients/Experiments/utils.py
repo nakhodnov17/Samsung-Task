@@ -1460,7 +1460,7 @@ setattr(nn.Sequential, "calc_log_prior", DistributionMover.calc_log_prior_net)
 
 def train(dm,
           dataloader_train, dataloader_test,
-          lr_str, epochs,
+          lr_str, start_epoch, end_epoch, n_epochs_save=20,
           move_theta_0=False, plot_graphs=True, verbose=False,
           checkpoint_file_name=None, plots_file_name=None, log_file_name=None,
           n_warmup_epochs=16,
@@ -1474,10 +1474,13 @@ def train(dm,
     test_accs_mean = []
     predictions_test_cummulative = torch.zeros([1, 1], dtype=t_type, device=device)
 
+    if log_file_name is not None:
+        log_file = open(log_file_name, 'a')
+        log_file.write('\rNew run of training.\r')
+        log_file.close()
+
     try:
-        pass
-        for epoch in range(epochs):
-            pass
+        for epoch in range(start_epoch, end_epoch):
             for X, y in dataloader_train:
                 X = X.double().to(device=device).view(X.shape[0], -1)
                 y = y.to(device=device)
@@ -1516,8 +1519,8 @@ def train(dm,
                 ### Get output of net before Softmax, mean and log, Shape = [n_particles, batch_size, output_features]
                 net_pred_pure = dm.predict_net(X_test, inference=False)
                 net_pred_pure = torch.mean(torch.nn.Softmax(dim=2)(net_pred_pure), dim=0)
-                predictions_test_current = torch.cat([predictions_test_current, net_pred_pure], dim=0)
-                y_test_all = torch.cat([y_test_all, y_test], dim=0)
+                predictions_test_current = torch.cat([predictions_test_current, net_pred_pure.data.detach().clone()], dim=0)
+                y_test_all = torch.cat([y_test_all, y_test.data.detach().clone()], dim=0)
 
                 net_pred = torch.log(net_pred_pure)
                 y_pred = torch.argmax(net_pred, dim=1)
@@ -1532,8 +1535,8 @@ def train(dm,
             if epoch >= n_warmup_epochs:
                 print((epoch - n_warmup_epochs) / (epoch - n_warmup_epochs + 1.), 1. / (epoch - n_warmup_epochs + 1.))
                 predictions_test_cummulative = (
-                            predictions_test_cummulative * (epoch - n_warmup_epochs) / (epoch - n_warmup_epochs + 1.) +
-                            predictions_test_current / (epoch - n_warmup_epochs + 1.))
+                        predictions_test_cummulative * (epoch - n_warmup_epochs) / (epoch - n_warmup_epochs + 1.) +
+                        predictions_test_current / (epoch - n_warmup_epochs + 1.))
                 log_predictions_test = torch.log(predictions_test_cummulative)
                 y_pred_all = torch.argmax(log_predictions_test, dim=1)
                 test_loss_mean = -torch.sum(torch.gather(log_predictions_test, 1, y_test_all.view(-1, 1)))
@@ -1571,11 +1574,11 @@ def train(dm,
                     )
                     log_file.close()
 
-            if epoch % 65 == 0 and epoch > 0 and checkpoint_file_name is not None:
-                torch.save(dm.state_dict(), checkpoint_file_name)
+            if epoch % n_epochs_save == 0 and epoch > start_epoch and checkpoint_file_name is not None:
+                torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))
 
             lr_str.step()
-
+            gpu_profile(frame=sys._getframe(), event='line', arg=None)
     except KeyboardInterrupt:
         pass
     if plot_graphs:
@@ -1589,7 +1592,7 @@ def train(dm,
                     plots_file_name
                     )
     if checkpoint_file_name is not None:
-        torch.save(dm.state_dict(), checkpoint_file_name)
+        torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))
 
     if verbose:
         return train_losses, test_losses, train_accs, test_accs

@@ -47,17 +47,19 @@ dm_3 = DistributionMover(task='net_class',
                       )
 lr_str_3 = LRStrategy(step_size=0.03, factor=0.97, n_epochs=1, patience=80)
 
-own_name = sys.argv[0][:sys.argv[0].find('.py')]
-checkpoint_file_name_3 = './Checkpoints/' + own_name + '.pth'
-plots_file_name_3 = './Plots/' + own_name + '.png'
-log_file_name_3 = './Logs/' + own_name + '.txt'
-if os.path.exists(checkpoint_file_name_3):
-    dm_3.load_state_dict(torch.load(checkpoint_file_name_3))
+own_name_3 = sys.argv[0][2:sys.argv[0].find('.py')]
+version_3 = 0
+checkpoint_file_name_3 = './Checkpoints/' + 'e{0}_' + own_name_3 + '.pth'
+plots_file_name_3 = './Plots/' + own_name_3 + '.png'
+log_file_name_3 = './Logs/' + own_name_3 + '.txt'
+if os.path.exists(checkpoint_file_name_3.format(version_3)):
+    dm_3.load_state_dict(torch.load(checkpoint_file_name_3.format(version_3)))
     lr_str_3.step_size = dm_3.step_size
-    lr_str_3.n_epochs = dm_3.epoch
-    
+    lr_str_3.iter = dm_3.epoch + 1
+
 train(dm=dm_3,
       dataloader_train=dataloader_m_train, dataloader_test=dataloader_m_test,
-      lr_str=lr_str_3, epochs=200,
-      checkpoint_file_name=checkpoint_file_name_3, plots_file_name=plots_file_name_3, log_file_name=log_file_name_3
+      lr_str=lr_str_3, start_epoch=lr_str_3.iter, end_epoch=lr_str_3.iter + 100, n_epochs_save=20,
+      checkpoint_file_name=checkpoint_file_name_3, plots_file_name=plots_file_name_3, log_file_name=log_file_name_3,
+      n_warmup_epochs=16
      )
