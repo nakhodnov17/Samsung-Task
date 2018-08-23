@@ -1627,7 +1627,7 @@ def train(dm,
                     log_file.close()
 
             if epoch % n_epochs_save == 0 and epoch > start_epoch and checkpoint_file_name is not None:
-                torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))
+                torch.save(dm.state_dict(), checkpoint_file_name.format(start_epoch, epoch))
 
             ### Update step_size
             lr_str.step()
@@ -1646,7 +1646,7 @@ def train(dm,
                     plots_file_name.format(start_epoch, epoch)
                     )
     if checkpoint_file_name is not None:
-        torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))
+        torch.save(dm.state_dict(), checkpoint_file_name.format(start_epoch, epoch))
 
     if verbose:
         return (train_losses, test_losses, test_losses_mean, test_losses_mean_previous,

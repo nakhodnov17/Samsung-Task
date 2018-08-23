@@ -29,16 +29,16 @@ Params:
 """
 
 use_cuda = True
-cuda_device_id = 4
+cuda_device_id = 5
 dataset = 'MNIST'
 batch_size = 100
 net_arc = 'fc-18-14'
 use_var_prior = False
-alpha = 1e-2
-n_particles = 5
+alpha = None
+n_particles = 1
 use_latent = False
 n_hidden_dims = 0
-experiment_name = 'model_3'
+experiment_name = 'model_6'
 version = 0
 n_epochs = 200
 n_epochs_save = 20

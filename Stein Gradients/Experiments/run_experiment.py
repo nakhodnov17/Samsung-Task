@@ -44,18 +44,18 @@ else:
     raise RuntimeError
 
 if config.net_arc == 'fc-300-100':
-    net = nn.Sequential(SteinLinear(28 * 28, 300, config.n_particles, use_var_prior=False),
+    net = nn.Sequential(SteinLinear(28 * 28, 300, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
                         nn.Tanh(),
-                        SteinLinear(300, 100, config.n_particles, use_var_prior=False),
+                        SteinLinear(300, 100, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
                         nn.Tanh(),
-                        SteinLinear(100, 10, config.n_particles, use_var_prior=False)
+                        SteinLinear(100, 10, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha)
                         ).to(device=device)
 elif config.net_arc == 'fc-18-14':
-    net = nn.Sequential(SteinLinear(28 * 28, 18, config.n_particles, use_var_prior=False),
+    net = nn.Sequential(SteinLinear(28 * 28, 18, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
                         nn.Tanh(),
-                        SteinLinear(18, 14, config.n_particles, use_var_prior=False),
+                        SteinLinear(18, 14, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
                         nn.Tanh(),
-                        SteinLinear(14, 10, config.n_particles, use_var_prior=False)
+                        SteinLinear(14, 10, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha)
                         ).to(device=device)
 else:
     raise RuntimeError
@@ -71,10 +71,10 @@ lr_str = LRStrategy(step_size=0.03, factor=0.97, n_epochs=1, patience=80)
 
 own_name = config.experiment_name
 version = args.version if args.version > 0 else config.version
-checkpoint_file_name = './Checkpoints/' + 'e{0}_' + own_name + '.pth'
+checkpoint_file_name = './Checkpoints/' + 'e{0}-{1}_' + own_name + '.pth'
 plots_file_name = './Plots/' + 'e{0}-{1}_' + own_name + '.png'
 log_file_name = './Logs/' + own_name + '.txt'
-if os.path.exists(checkpoint_file_name.format(version)):
+if os.path.exists(checkpoint_file_name.format(0, version)):
     dm.load_state_dict(torch.load(checkpoint_file_name.format(version)))
     lr_str.step_size = dm.step_size
     lr_str.iter = dm.epoch + 1

@@ -9,6 +9,10 @@ Params:
     net_arc (str): description of network
         'fc-18-14' | 'fc-300-100'
         Default: 'fc-18-14'
+    use_var_prior (bool): if set to True, use Gamma prior distribution of weight variance
+        Default: False
+    alpha (float, None): specify alpha for weight prior ~N(w|0, 1 / alpha)
+        If alpha == None then use GLOROT prior
     n_particles (int): number of particles in stein gradient
     use_latent (bool): if True subspace Stein is used
     n_hidden_dims (int): dim of subspace
@@ -29,6 +33,8 @@ cuda_device_id = 5
 dataset = 'MNIST'
 batch_size = 100
 net_arc = 'fc-18-14'
+use_var_prior = False
+alpha = 1e-2
 n_particles = 1
 use_latent = False
 n_hidden_dims = 0
