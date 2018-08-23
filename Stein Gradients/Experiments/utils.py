@@ -1643,7 +1643,7 @@ def train(dm,
                       'Cross Entropy Loss (Test (Mean (n_prev)))'],
                      ['Accuracy (Train)', 'Accuracy (Test)', 'Accuracy (Mean)', 'Accuracy (Mean (n_prev))']
                      ],
-                    plots_file_name
+                    plots_file_name.format(start_epoch, epoch)
                     )
     if checkpoint_file_name is not None:
         torch.save(dm.state_dict(), checkpoint_file_name.format(epoch))

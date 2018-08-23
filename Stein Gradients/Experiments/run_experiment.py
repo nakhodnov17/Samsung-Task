@@ -72,7 +72,7 @@ lr_str = LRStrategy(step_size=0.03, factor=0.97, n_epochs=1, patience=80)
 own_name = config.experiment_name
 version = args.version if args.version > 0 else config.version
 checkpoint_file_name = './Checkpoints/' + 'e{0}_' + own_name + '.pth'
-plots_file_name = './Plots/' + own_name + '.png'
+plots_file_name = './Plots/' + 'e{0}-{1}_' + own_name + '.png'
 log_file_name = './Logs/' + own_name + '.txt'
 if os.path.exists(checkpoint_file_name.format(version)):
     dm.load_state_dict(torch.load(checkpoint_file_name.format(version)))
