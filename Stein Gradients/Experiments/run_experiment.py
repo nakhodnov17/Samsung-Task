@@ -10,7 +10,7 @@ parser.add_argument('--version', type=int, default=-1,
                     help='specify checkpoint to continue training process (default: None)')
 args = parser.parse_args()
 
-config = importlib.import_module(args.config_name)
+config = importlib.import_module('Configs.' + args.config_name)
 
 
 use_cuda = False
@@ -75,9 +75,21 @@ checkpoint_file_name = './Checkpoints/' + 'e{0}-{1}_' + own_name + '.pth'
 plots_file_name = './Plots/' + 'e{0}-{1}_' + own_name + '.png'
 log_file_name = './Logs/' + own_name + '.txt'
 if os.path.exists(checkpoint_file_name.format(0, version)):
-    dm.load_state_dict(torch.load(checkpoint_file_name.format(version)))
+    dm.load_state_dict(torch.load(checkpoint_file_name.format(0, version)))
     lr_str.step_size = dm.step_size
     lr_str.iter = dm.epoch + 1
+
+try:
+    if config.use_initializer:
+        initializer = torch.load(config.initializer_name)
+        if config.init_theta_0:
+            dm.lt.theta_0.data = initializer['particles'].data
+        ### free memory
+        del initializer
+except:
+    print('Initialization failed!')
+    raise RuntimeError
+
 
 train(dm=dm,
       dataloader_train=dataloader_train, dataloader_test=dataloader_test,
