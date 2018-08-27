@@ -31,25 +31,25 @@ Params:
     init_theta_0 (bool): if True then use theta_0 from @initializer_name checkpoint
 """
 
-use_cuda =
-cuda_device_id =
+use_cuda = True
+cuda_device_id = 4
 dataset = 'MNIST'
 batch_size = 100
-net_arc = 'fc-18-14'
-use_var_prior =
-alpha =
-n_particles =
-use_latent =
-n_hidden_dims =
-experiment_name =
-version =
-n_epochs =
+net_arc = 'fc-300-100'
+use_var_prior = None
+alpha = None
+n_particles = None
+use_latent = None
+n_hidden_dims = None
+experiment_name = 'ml_est'
+version = 0
+n_epochs = 200
 n_epochs_save = 20
 n_epochs_log = 1
-move_theta_0 =
-n_warmup_epochs =
-n_previous =
-use_initializer =
-initializer_name =
-init_theta_0 =
-comment =
+move_theta_0 = None
+n_warmup_epochs = None
+n_previous = None
+use_initializer = None
+initializer_name = None
+init_theta_0 = None
+comment = 'ML estimation'

@@ -52,3 +52,4 @@ n_previous = 6
 use_initializer = True
 initializer_name = ('./Checkpoints/' + 'e{0}-{1}_' + 'model_11' + '.pth').format(0, 199)
 init_theta_0 = True
+comment = 'Use MAP initialization'

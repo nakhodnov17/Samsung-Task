@@ -98,6 +98,7 @@ train_accs = []
 ### Test loss/accuracy
 test_losses = []
 test_accs = []
+best_test_acc = 0.
 try:
     for epoch in range(200):
         ### One update of particles via all dataloader_train
@@ -171,6 +172,10 @@ try:
                           )
             )
             log_file.close()
+
+        if test_accs[-1] > best_test_acc:
+            best_test_acc = test_accs[-1]
+            torch.save(net.state_dict(), checkpoint_file_name.format(0, epoch))
 
 except KeyboardInterrupt:
     pass

@@ -598,4 +598,4 @@ Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.125/0
 Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.969/0.982/0.980	
 Epoch 199... 	 Step Size 0.003	 Kernel factor: 0.061	 Burn-in Coeff: 1.000
 Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.023/0.101/0.075/0.064
-Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.992/0.974/0.982/0.980	
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.992/0.974/0.982/0.980	New run of training.

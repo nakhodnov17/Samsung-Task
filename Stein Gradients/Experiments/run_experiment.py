@@ -83,7 +83,19 @@ try:
     if config.use_initializer:
         initializer = torch.load(config.initializer_name)
         if config.init_theta_0:
-            dm.lt.theta_0.data = initializer['particles'].data
+            if 'particles' in initializer.keys():
+                dm.lt.theta_0.data = initializer['particles'].data
+            else:
+                theta_0 = torch.tensor([], dtype=t_type, device=device)
+                for name, weight in initializer.items():
+                    if len(weight.shape) > 1:
+                        ### SteinLinear layer has weight matrix with shape [in_features, out_features]
+                        ### while nn.Linear has [out_features, in_features]
+                        theta_0 = torch.cat([theta_0, weight.transpose(1, 0).contiguous().view(-1)], dim=0)
+                    else:
+                        theta_0 = torch.cat([theta_0, weight.view(-1)], dim=0)
+                dm.lt.theta_0.data = theta_0.data.view(-1, 1)
+                del theta_0
         ### free memory
         del initializer
 except:

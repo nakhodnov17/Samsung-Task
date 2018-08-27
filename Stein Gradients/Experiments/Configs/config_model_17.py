@@ -52,3 +52,4 @@ n_previous = 6
 use_initializer = False
 initializer_name = None
 init_theta_0 = False
+comment = ''
