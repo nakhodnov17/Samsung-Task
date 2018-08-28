@@ -56,3 +56,546 @@ Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.907/0.907/0.941/0
 Epoch 18... 	 Step Size 0.017	 Kernel factor: 32.027	 Burn-in Coeff: 1.000
 Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.373/0.373/0.235/0.229
 Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.889/0.891/0.944/0.941	
+Epoch 19... 	 Step Size 0.017	 Kernel factor: 28.466	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.430/0.435/0.235/0.230
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.865/0.860/0.942/0.939	
+Epoch 20... 	 Step Size 0.016	 Kernel factor: 28.780	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.329/0.330/0.232/0.233
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.899/0.902/0.945/0.942	
+Epoch 21... 	 Step Size 0.016	 Kernel factor: 27.103	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.265/0.257/0.224/0.218
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.923/0.927/0.946/0.946	
+Epoch 22... 	 Step Size 0.015	 Kernel factor: 24.723	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.283/0.277/0.219/0.207
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.921/0.920/0.949/0.948	
+Epoch 23... 	 Step Size 0.015	 Kernel factor: 22.844	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.274/0.283/0.215/0.202
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.921/0.919/0.949/0.949	
+Epoch 24... 	 Step Size 0.014	 Kernel factor: 20.412	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.254/0.253/0.210/0.193
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.924/0.926/0.951/0.950	
+Epoch 25... 	 Step Size 0.014	 Kernel factor: 18.434	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.290/0.288/0.208/0.184
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.914/0.919/0.952/0.951	
+Epoch 26... 	 Step Size 0.014	 Kernel factor: 17.725	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.239/0.248/0.205/0.177
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.929/0.930/0.953/0.954	
+Epoch 27... 	 Step Size 0.013	 Kernel factor: 16.556	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.289/0.277/0.202/0.179
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.913/0.920/0.954/0.956	
+Epoch 28... 	 Step Size 0.013	 Kernel factor: 15.615	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.272/0.280/0.200/0.181
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.918/0.918/0.955/0.955	
+Epoch 29... 	 Step Size 0.012	 Kernel factor: 14.070	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.235/0.231/0.197/0.176
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.932/0.934/0.956/0.957	
+Epoch 30... 	 Step Size 0.012	 Kernel factor: 13.938	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.227/0.231/0.195/0.173
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.933/0.932/0.957/0.958	
+Epoch 31... 	 Step Size 0.012	 Kernel factor: 12.939	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.237/0.251/0.193/0.169
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.929/0.926/0.957/0.958	
+Epoch 32... 	 Step Size 0.011	 Kernel factor: 11.950	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.215/0.216/0.190/0.166
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.935/0.934/0.958/0.957	
+Epoch 33... 	 Step Size 0.011	 Kernel factor: 10.577	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.229/0.230/0.188/0.161
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.933/0.934/0.958/0.957	
+Epoch 34... 	 Step Size 0.011	 Kernel factor: 9.362	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.211/0.215/0.186/0.155
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.938/0.937/0.958/0.959	
+Epoch 35... 	 Step Size 0.010	 Kernel factor: 8.918	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.204/0.218/0.183/0.154
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.941/0.937/0.958/0.958	
+Epoch 36... 	 Step Size 0.010	 Kernel factor: 8.329	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.222/0.227/0.182/0.153
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.934/0.935/0.958/0.958	
+Epoch 37... 	 Step Size 0.010	 Kernel factor: 7.855	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.200/0.224/0.180/0.151
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.941/0.937/0.959/0.959	
+Epoch 38... 	 Step Size 0.009	 Kernel factor: 7.435	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.189/0.194/0.177/0.149
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.943/0.944/0.960/0.959	
+Epoch 39... 	 Step Size 0.009	 Kernel factor: 7.005	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.200/0.211/0.176/0.147
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.939/0.936/0.960/0.960	
+Epoch 40... 	 Step Size 0.009	 Kernel factor: 6.693	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.182/0.201/0.174/0.146
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.945/0.941/0.961/0.962	
+Epoch 41... 	 Step Size 0.009	 Kernel factor: 5.993	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.193/0.202/0.173/0.143
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.942/0.938/0.961/0.962	
+Epoch 42... 	 Step Size 0.008	 Kernel factor: 5.632	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.177/0.195/0.171/0.140
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.948/0.945/0.961/0.963	
+Epoch 43... 	 Step Size 0.008	 Kernel factor: 5.359	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.193/0.203/0.169/0.138
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.941/0.938/0.962/0.963	
+Epoch 44... 	 Step Size 0.008	 Kernel factor: 5.089	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.176/0.201/0.168/0.139
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.948/0.943/0.962/0.964	
+Epoch 45... 	 Step Size 0.008	 Kernel factor: 4.958	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.180/0.178/0.166/0.135
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.946/0.946/0.962/0.965	
+Epoch 46... 	 Step Size 0.007	 Kernel factor: 4.717	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.165/0.182/0.164/0.132
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.951/0.948/0.962/0.967	
+Epoch 47... 	 Step Size 0.007	 Kernel factor: 4.546	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.157/0.172/0.163/0.129
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.953/0.949/0.963/0.967	
+Epoch 48... 	 Step Size 0.007	 Kernel factor: 4.409	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.153/0.182/0.161/0.127
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.954/0.950/0.963/0.968	
+Epoch 49... 	 Step Size 0.007	 Kernel factor: 4.073	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.155/0.184/0.160/0.124
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.952/0.947/0.964/0.968	
+Epoch 50... 	 Step Size 0.007	 Kernel factor: 3.865	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.155/0.173/0.158/0.120
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.953/0.949/0.964/0.967	
+Epoch 51... 	 Step Size 0.006	 Kernel factor: 3.663	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.139/0.151/0.156/0.117
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.957/0.955/0.965/0.968	
+Epoch 52... 	 Step Size 0.006	 Kernel factor: 3.555	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.134/0.155/0.155/0.114
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.959/0.956/0.965/0.969	
+Epoch 53... 	 Step Size 0.006	 Kernel factor: 3.302	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.129/0.145/0.153/0.112
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.963/0.957/0.965/0.969	
+Epoch 54... 	 Step Size 0.006	 Kernel factor: 3.197	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.124/0.147/0.152/0.109
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.963/0.958/0.966/0.971	
+Epoch 55... 	 Step Size 0.006	 Kernel factor: 2.965	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.121/0.149/0.150/0.106
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.964/0.959/0.966/0.971	
+Epoch 56... 	 Step Size 0.005	 Kernel factor: 2.946	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.133/0.153/0.149/0.103
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.960/0.955/0.967/0.971	
+Epoch 57... 	 Step Size 0.005	 Kernel factor: 2.861	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.120/0.144/0.147/0.103
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.964/0.957/0.967/0.973	
+Epoch 58... 	 Step Size 0.005	 Kernel factor: 2.807	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.106/0.134/0.146/0.101
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.969/0.962/0.967/0.973	
+Epoch 59... 	 Step Size 0.005	 Kernel factor: 2.758	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.108/0.145/0.145/0.102
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.967/0.955/0.968/0.973	
+Epoch 60... 	 Step Size 0.005	 Kernel factor: 2.657	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.115/0.142/0.143/0.102
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.966/0.958/0.968/0.973	
+Epoch 61... 	 Step Size 0.005	 Kernel factor: 2.541	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.110/0.138/0.142/0.101
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.967/0.960/0.968/0.972	
+Epoch 62... 	 Step Size 0.005	 Kernel factor: 2.531	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.097/0.127/0.141/0.097
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.970/0.963/0.969/0.974	
+Epoch 63... 	 Step Size 0.004	 Kernel factor: 2.484	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.099/0.121/0.139/0.094
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.970/0.965/0.969/0.974	
+Epoch 64... 	 Step Size 0.004	 Kernel factor: 2.425	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.088/0.113/0.138/0.092
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.973/0.966/0.969/0.975	
+Epoch 65... 	 Step Size 0.004	 Kernel factor: 2.388	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.095/0.130/0.137/0.089
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.971/0.962/0.970/0.977	
+Epoch 66... 	 Step Size 0.004	 Kernel factor: 2.311	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.089/0.129/0.135/0.086
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.972/0.964/0.970/0.977	
+Epoch 67... 	 Step Size 0.004	 Kernel factor: 2.267	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.087/0.119/0.134/0.083
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.973/0.964/0.971/0.977	
+Epoch 68... 	 Step Size 0.004	 Kernel factor: 2.181	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.083/0.115/0.133/0.082
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.975/0.968/0.971/0.978	
+Epoch 69... 	 Step Size 0.004	 Kernel factor: 2.138	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.075/0.111/0.131/0.082
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.977/0.969/0.971/0.977	
+Epoch 70... 	 Step Size 0.004	 Kernel factor: 2.112	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.070/0.113/0.130/0.082
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.977/0.967/0.972/0.977	
+Epoch 71... 	 Step Size 0.003	 Kernel factor: 2.062	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.075/0.124/0.129/0.081
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.977/0.965/0.972/0.976	
+Epoch 72... 	 Step Size 0.003	 Kernel factor: 2.003	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.068/0.106/0.128/0.079
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.979/0.971/0.972/0.978	
+Epoch 73... 	 Step Size 0.003	 Kernel factor: 1.988	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.070/0.117/0.127/0.078
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.979/0.967/0.972/0.977	
+Epoch 74... 	 Step Size 0.003	 Kernel factor: 1.933	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.062/0.111/0.126/0.078
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.981/0.969/0.973/0.978	
+Epoch 75... 	 Step Size 0.003	 Kernel factor: 1.882	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.064/0.110/0.125/0.077
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.980/0.969/0.973/0.978	
+Epoch 76... 	 Step Size 0.003	 Kernel factor: 1.848	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.057/0.110/0.123/0.077
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.983/0.968/0.973/0.977	
+Epoch 77... 	 Step Size 0.003	 Kernel factor: 1.811	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.060/0.109/0.122/0.074
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.982/0.969/0.974/0.979	
+Epoch 78... 	 Step Size 0.003	 Kernel factor: 1.798	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.050/0.097/0.121/0.073
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.974/0.974/0.978	
+Epoch 79... 	 Step Size 0.003	 Kernel factor: 1.767	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.048/0.104/0.120/0.071
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.971/0.974/0.979	
+Epoch 80... 	 Step Size 0.003	 Kernel factor: 1.735	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.104/0.119/0.071
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.972/0.975/0.979	
+Epoch 81... 	 Step Size 0.003	 Kernel factor: 1.688	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.106/0.118/0.070
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.972/0.975/0.979	
+Epoch 82... 	 Step Size 0.003	 Kernel factor: 1.671	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.046/0.099/0.117/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.971/0.975/0.979	
+Epoch 83... 	 Step Size 0.003	 Kernel factor: 1.626	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.046/0.103/0.116/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.972/0.975/0.980	
+Epoch 84... 	 Step Size 0.003	 Kernel factor: 1.589	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.095/0.115/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.974/0.975/0.981	
+Epoch 85... 	 Step Size 0.003	 Kernel factor: 1.577	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.050/0.116/0.114/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.984/0.968/0.976/0.981	
+Epoch 86... 	 Step Size 0.003	 Kernel factor: 1.556	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.109/0.113/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.971/0.976/0.980	
+Epoch 87... 	 Step Size 0.003	 Kernel factor: 1.528	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.103/0.113/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.970/0.976/0.980	
+Epoch 88... 	 Step Size 0.003	 Kernel factor: 1.501	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.103/0.112/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.973/0.976/0.981	
+Epoch 89... 	 Step Size 0.003	 Kernel factor: 1.478	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.041/0.102/0.111/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.973/0.976/0.980	
+Epoch 90... 	 Step Size 0.003	 Kernel factor: 1.455	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.097/0.110/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.973/0.976/0.981	
+Epoch 91... 	 Step Size 0.003	 Kernel factor: 1.440	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.053/0.113/0.109/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.983/0.970/0.977/0.980	
+Epoch 92... 	 Step Size 0.003	 Kernel factor: 1.426	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.048/0.101/0.109/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.972/0.977/0.981	
+Epoch 93... 	 Step Size 0.003	 Kernel factor: 1.414	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.048/0.119/0.108/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.968/0.977/0.982	
+Epoch 94... 	 Step Size 0.003	 Kernel factor: 1.404	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.052/0.119/0.107/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.984/0.970/0.977/0.981	
+Epoch 95... 	 Step Size 0.003	 Kernel factor: 1.385	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.047/0.110/0.106/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.971/0.977/0.981	
+Epoch 96... 	 Step Size 0.003	 Kernel factor: 1.377	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.105/0.106/0.070
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.970/0.978/0.981	
+Epoch 97... 	 Step Size 0.003	 Kernel factor: 1.349	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.044/0.103/0.105/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.971/0.978/0.981	
+Epoch 98... 	 Step Size 0.003	 Kernel factor: 1.325	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.040/0.107/0.105/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.973/0.978/0.980	
+Epoch 99... 	 Step Size 0.003	 Kernel factor: 1.323	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.117/0.104/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.970/0.978/0.979	
+Epoch 100... 	 Step Size 0.003	 Kernel factor: 1.305	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.040/0.109/0.103/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.969/0.978/0.979	
+Epoch 101... 	 Step Size 0.003	 Kernel factor: 1.293	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.095/0.103/0.069
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.973/0.978/0.979	
+Epoch 102... 	 Step Size 0.003	 Kernel factor: 1.284	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.036/0.105/0.102/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.973/0.978/0.979	
+Epoch 103... 	 Step Size 0.003	 Kernel factor: 1.267	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.103/0.102/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.972/0.979/0.979	
+Epoch 104... 	 Step Size 0.003	 Kernel factor: 1.252	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.106/0.101/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.972/0.979/0.980	
+Epoch 105... 	 Step Size 0.003	 Kernel factor: 1.246	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.040/0.099/0.100/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.972/0.979/0.980	
+Epoch 106... 	 Step Size 0.003	 Kernel factor: 1.236	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.039/0.103/0.100/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.974/0.979/0.981	
+Epoch 107... 	 Step Size 0.003	 Kernel factor: 1.229	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.040/0.104/0.099/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.975/0.979/0.980	
+Epoch 108... 	 Step Size 0.003	 Kernel factor: 1.212	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.110/0.099/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.979/0.980	
+Epoch 109... 	 Step Size 0.003	 Kernel factor: 1.200	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.039/0.105/0.098/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.971/0.979/0.980	
+Epoch 110... 	 Step Size 0.003	 Kernel factor: 1.185	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.108/0.098/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.970/0.979/0.981	
+Epoch 111... 	 Step Size 0.003	 Kernel factor: 1.170	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.035/0.104/0.097/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.974/0.979/0.981	
+Epoch 112... 	 Step Size 0.003	 Kernel factor: 1.146	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.109/0.097/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.971/0.979/0.980	
+Epoch 113... 	 Step Size 0.003	 Kernel factor: 1.133	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.106/0.096/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.973/0.979/0.980	
+Epoch 114... 	 Step Size 0.003	 Kernel factor: 1.122	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.103/0.096/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.973/0.979/0.980	
+Epoch 115... 	 Step Size 0.003	 Kernel factor: 1.124	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.031/0.105/0.096/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.974/0.979/0.981	
+Epoch 116... 	 Step Size 0.003	 Kernel factor: 1.121	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.121/0.095/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.967/0.979/0.981	
+Epoch 117... 	 Step Size 0.003	 Kernel factor: 1.111	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.120/0.095/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.969/0.979/0.979	
+Epoch 118... 	 Step Size 0.003	 Kernel factor: 1.108	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.117/0.094/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.971/0.979/0.980	
+Epoch 119... 	 Step Size 0.003	 Kernel factor: 1.105	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.121/0.094/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.970/0.979/0.980	
+Epoch 120... 	 Step Size 0.003	 Kernel factor: 1.099	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.103/0.094/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.973/0.979/0.980	
+Epoch 121... 	 Step Size 0.003	 Kernel factor: 1.090	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.106/0.093/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.971/0.979/0.979	
+Epoch 122... 	 Step Size 0.003	 Kernel factor: 1.085	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.041/0.096/0.093/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.973/0.979/0.980	
+Epoch 123... 	 Step Size 0.003	 Kernel factor: 1.099	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.040/0.107/0.092/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.973/0.979/0.981	
+Epoch 124... 	 Step Size 0.003	 Kernel factor: 1.090	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.031/0.094/0.092/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.973/0.979/0.980	
+Epoch 125... 	 Step Size 0.003	 Kernel factor: 1.092	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.106/0.092/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.971/0.980/0.981	
+Epoch 126... 	 Step Size 0.003	 Kernel factor: 1.083	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.109/0.091/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.971/0.980/0.981	
+Epoch 127... 	 Step Size 0.003	 Kernel factor: 1.075	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.109/0.091/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.972/0.980/0.981	
+Epoch 128... 	 Step Size 0.003	 Kernel factor: 1.063	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.101/0.090/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.975/0.980/0.981	
+Epoch 129... 	 Step Size 0.003	 Kernel factor: 1.063	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.031/0.101/0.090/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.974/0.980/0.981	
+Epoch 130... 	 Step Size 0.003	 Kernel factor: 1.064	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.036/0.100/0.090/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.973/0.980/0.981	
+Epoch 131... 	 Step Size 0.003	 Kernel factor: 1.066	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.035/0.103/0.089/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.972/0.980/0.981	
+Epoch 132... 	 Step Size 0.003	 Kernel factor: 1.066	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.039/0.106/0.089/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.970/0.980/0.981	
+Epoch 133... 	 Step Size 0.003	 Kernel factor: 1.060	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.108/0.089/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.971/0.980/0.981	
+Epoch 134... 	 Step Size 0.003	 Kernel factor: 1.049	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.108/0.088/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.973/0.980/0.981	
+Epoch 135... 	 Step Size 0.003	 Kernel factor: 1.050	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.029/0.107/0.088/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.972/0.980/0.981	
+Epoch 136... 	 Step Size 0.003	 Kernel factor: 1.042	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.100/0.088/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.972/0.980/0.980	
+Epoch 137... 	 Step Size 0.003	 Kernel factor: 1.031	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.035/0.107/0.087/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.973/0.980/0.980	
+Epoch 138... 	 Step Size 0.003	 Kernel factor: 1.028	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.107/0.087/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.980/0.980	
+Epoch 139... 	 Step Size 0.003	 Kernel factor: 1.029	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.103/0.087/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.973/0.980/0.981	
+Epoch 140... 	 Step Size 0.003	 Kernel factor: 1.029	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.109/0.087/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.980/0.981	
+Epoch 141... 	 Step Size 0.003	 Kernel factor: 1.033	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.108/0.086/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.987/0.971/0.980/0.980	
+Epoch 142... 	 Step Size 0.003	 Kernel factor: 1.031	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.111/0.086/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.972/0.980/0.980	
+Epoch 143... 	 Step Size 0.003	 Kernel factor: 1.020	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.036/0.110/0.086/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.972/0.980/0.980	
+Epoch 144... 	 Step Size 0.003	 Kernel factor: 1.021	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.104/0.085/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.973/0.980/0.981	
+Epoch 145... 	 Step Size 0.003	 Kernel factor: 1.020	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.103/0.085/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.971/0.980/0.981	
+Epoch 146... 	 Step Size 0.003	 Kernel factor: 1.022	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.098/0.085/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.974/0.980/0.982	
+Epoch 147... 	 Step Size 0.003	 Kernel factor: 1.018	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.101/0.085/0.062
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.975/0.980/0.982	
+Epoch 148... 	 Step Size 0.003	 Kernel factor: 1.023	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.043/0.122/0.084/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.968/0.980/0.982	
+Epoch 149... 	 Step Size 0.003	 Kernel factor: 1.017	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.116/0.084/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.972/0.980/0.982	
+Epoch 150... 	 Step Size 0.003	 Kernel factor: 1.010	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.114/0.084/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.970/0.980/0.980	
+Epoch 151... 	 Step Size 0.003	 Kernel factor: 1.010	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.118/0.084/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.970/0.980/0.980	
+Epoch 152... 	 Step Size 0.003	 Kernel factor: 1.014	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.028/0.109/0.084/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.971/0.980/0.980	
+Epoch 153... 	 Step Size 0.003	 Kernel factor: 1.017	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.104/0.083/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.971/0.980/0.978	
+Epoch 154... 	 Step Size 0.003	 Kernel factor: 1.008	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.119/0.083/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.972/0.980/0.979	
+Epoch 155... 	 Step Size 0.003	 Kernel factor: 1.011	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.111/0.083/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.985/0.971/0.980/0.979	
+Epoch 156... 	 Step Size 0.003	 Kernel factor: 1.012	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.115/0.083/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.972/0.980/0.979	
+Epoch 157... 	 Step Size 0.003	 Kernel factor: 1.001	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.042/0.118/0.082/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.971/0.980/0.980	
+Epoch 158... 	 Step Size 0.003	 Kernel factor: 1.000	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.120/0.082/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.970/0.980/0.980	
+Epoch 159... 	 Step Size 0.003	 Kernel factor: 0.997	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.113/0.082/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.969/0.980/0.981	
+Epoch 160... 	 Step Size 0.003	 Kernel factor: 0.996	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.111/0.082/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.980/0.981	
+Epoch 161... 	 Step Size 0.003	 Kernel factor: 0.994	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.116/0.082/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.971/0.980/0.982	
+Epoch 162... 	 Step Size 0.003	 Kernel factor: 0.986	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.029/0.098/0.081/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.975/0.980/0.981	
+Epoch 163... 	 Step Size 0.003	 Kernel factor: 0.980	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.028/0.105/0.081/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.972/0.980/0.981	
+Epoch 164... 	 Step Size 0.003	 Kernel factor: 0.980	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.028/0.110/0.081/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.973/0.980/0.980	
+Epoch 165... 	 Step Size 0.003	 Kernel factor: 0.988	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.045/0.120/0.081/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.986/0.968/0.980/0.980	
+Epoch 166... 	 Step Size 0.003	 Kernel factor: 0.985	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.111/0.081/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.980/0.980	
+Epoch 167... 	 Step Size 0.003	 Kernel factor: 0.987	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.129/0.081/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.967/0.980/0.981	
+Epoch 168... 	 Step Size 0.003	 Kernel factor: 0.985	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.106/0.080/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.973/0.981/0.981	
+Epoch 169... 	 Step Size 0.003	 Kernel factor: 0.984	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.029/0.106/0.080/0.068
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.973/0.981/0.981	
+Epoch 170... 	 Step Size 0.003	 Kernel factor: 0.985	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.029/0.103/0.080/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.972/0.981/0.981	
+Epoch 171... 	 Step Size 0.003	 Kernel factor: 0.986	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.091/0.080/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.974/0.981/0.981	
+Epoch 172... 	 Step Size 0.003	 Kernel factor: 0.989	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.029/0.095/0.080/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.974/0.981/0.981	
+Epoch 173... 	 Step Size 0.003	 Kernel factor: 0.998	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.031/0.100/0.079/0.060
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.975/0.981/0.982	
+Epoch 174... 	 Step Size 0.003	 Kernel factor: 0.994	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.037/0.108/0.079/0.061
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.972/0.981/0.982	
+Epoch 175... 	 Step Size 0.003	 Kernel factor: 1.001	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.036/0.118/0.079/0.062
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.971/0.981/0.982	
+Epoch 176... 	 Step Size 0.003	 Kernel factor: 0.995	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.031/0.106/0.079/0.061
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.973/0.981/0.982	
+Epoch 177... 	 Step Size 0.003	 Kernel factor: 1.001	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.027/0.104/0.079/0.062
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.974/0.981/0.981	
+Epoch 178... 	 Step Size 0.003	 Kernel factor: 1.007	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.104/0.078/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.974/0.981/0.981	
+Epoch 179... 	 Step Size 0.003	 Kernel factor: 1.010	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.031/0.105/0.078/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.973/0.981/0.980	
+Epoch 180... 	 Step Size 0.003	 Kernel factor: 1.006	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.111/0.078/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.981/0.981	
+Epoch 181... 	 Step Size 0.003	 Kernel factor: 1.004	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.036/0.127/0.078/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.969/0.981/0.981	
+Epoch 182... 	 Step Size 0.003	 Kernel factor: 1.001	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.120/0.078/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.970/0.981/0.981	
+Epoch 183... 	 Step Size 0.003	 Kernel factor: 0.999	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.027/0.098/0.078/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.974/0.981/0.980	
+Epoch 184... 	 Step Size 0.003	 Kernel factor: 1.003	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.110/0.078/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.969/0.981/0.980	
+Epoch 185... 	 Step Size 0.003	 Kernel factor: 1.003	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.026/0.104/0.077/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.973/0.981/0.980	
+Epoch 186... 	 Step Size 0.003	 Kernel factor: 0.998	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.105/0.077/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.974/0.981/0.981	
+Epoch 187... 	 Step Size 0.003	 Kernel factor: 1.010	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.024/0.100/0.077/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.992/0.974/0.981/0.981	
+Epoch 188... 	 Step Size 0.003	 Kernel factor: 1.011	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.113/0.077/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.971/0.981/0.980	
+Epoch 189... 	 Step Size 0.003	 Kernel factor: 1.019	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.035/0.107/0.077/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.973/0.981/0.981	
+Epoch 190... 	 Step Size 0.003	 Kernel factor: 1.024	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.113/0.077/0.063
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.971/0.981/0.981	
+Epoch 191... 	 Step Size 0.003	 Kernel factor: 1.025	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.029/0.103/0.076/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.972/0.981/0.982	
+Epoch 192... 	 Step Size 0.003	 Kernel factor: 1.031	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.102/0.076/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.975/0.981/0.982	
+Epoch 193... 	 Step Size 0.003	 Kernel factor: 1.033	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.114/0.076/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.973/0.982/0.982	
+Epoch 194... 	 Step Size 0.003	 Kernel factor: 1.025	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.028/0.098/0.076/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.991/0.973/0.981/0.981	
+Epoch 195... 	 Step Size 0.003	 Kernel factor: 1.033	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.032/0.105/0.076/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.971/0.981/0.981	
+Epoch 196... 	 Step Size 0.003	 Kernel factor: 1.033	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.030/0.115/0.076/0.065
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.990/0.971/0.981/0.981	
+Epoch 197... 	 Step Size 0.003	 Kernel factor: 1.020	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.038/0.116/0.076/0.066
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.988/0.969/0.982/0.981	
+Epoch 198... 	 Step Size 0.003	 Kernel factor: 1.016	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.033/0.115/0.076/0.067
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.971/0.982/0.980	
+Epoch 199... 	 Step Size 0.003	 Kernel factor: 1.021	 Burn-in Coeff: 1.000
+Empirical Loss(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.034/0.108/0.075/0.064
+Accuracy(Train/Test/Test (Mean (All))/Test (Mean (n_prev))): 0.989/0.972/0.982/0.980	
