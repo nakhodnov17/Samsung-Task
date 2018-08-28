@@ -44,19 +44,21 @@ else:
     raise RuntimeError
 
 if config.net_arc == 'fc-300-100':
-    net = nn.Sequential(SteinLinear(28 * 28, 300, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
-                        nn.Tanh(),
-                        SteinLinear(300, 100, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
-                        nn.Tanh(),
-                        SteinLinear(100, 10, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha)
-                        ).to(device=device)
+    net = nn.Sequential(
+        SteinLinear(28 * 28, 300, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
+        nn.Tanh(),
+        SteinLinear(300, 100, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
+        nn.Tanh(),
+        SteinLinear(100, 10, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha)
+    ).to(device=device)
 elif config.net_arc == 'fc-18-14':
-    net = nn.Sequential(SteinLinear(28 * 28, 18, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
-                        nn.Tanh(),
-                        SteinLinear(18, 14, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
-                        nn.Tanh(),
-                        SteinLinear(14, 10, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha)
-                        ).to(device=device)
+    net = nn.Sequential(
+        SteinLinear(28 * 28, 18, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
+        nn.Tanh(),
+        SteinLinear(18, 14, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha),
+        nn.Tanh(),
+        SteinLinear(14, 10, config.n_particles, use_var_prior=config.use_var_prior, alpha=config.alpha)
+    ).to(device=device)
 else:
     raise RuntimeError
 
@@ -89,14 +91,14 @@ try:
                 theta_0 = torch.tensor([], dtype=t_type, device=device)
                 for name, weight in initializer.items():
                     if len(weight.shape) > 1:
-                        ### SteinLinear layer has weight matrix with shape [in_features, out_features]
-                        ### while nn.Linear has [out_features, in_features]
+                        # SteinLinear layer has weight matrix with shape [in_features, out_features]
+                        # while nn.Linear has [out_features, in_features]
                         theta_0 = torch.cat([theta_0, weight.transpose(1, 0).contiguous().view(-1)], dim=0)
                     else:
                         theta_0 = torch.cat([theta_0, weight.view(-1)], dim=0)
                 dm.lt.theta_0.data = theta_0.data.view(-1, 1)
                 del theta_0
-        ### free memory
+        # free memory
         del initializer
 except:
     print('Initialization failed!')

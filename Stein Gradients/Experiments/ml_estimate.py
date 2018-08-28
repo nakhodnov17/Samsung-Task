@@ -50,11 +50,11 @@ t_type = torch.float64
 
 
 def print_plots(data, axis, labels, file_name=None):
-    N_plots = len(data)
-    plt.figure(figsize=(30, (N_plots // 3 + 1) * 10))
+    n_plots = len(data)
+    plt.figure(figsize=(30, (n_plots // 3 + 1) * 10))
 
     for idx in range(len(data)):
-        plt.subplot(N_plots // 3 + 1, 3, idx + 1)
+        plt.subplot(n_plots // 3 + 1, 3, idx + 1)
         for jdx in range(len(data[idx])):
             plt.plot(data[idx][jdx], label=labels[idx][jdx])
         plt.xlabel(axis[idx][0], fontsize=16)
@@ -92,35 +92,35 @@ if log_file_name is not None:
     log_file.write('\rNew run of training.\r')
     log_file.close()
 
-### Train loss/accuracy
+# Train loss/accuracy
 train_losses = []
 train_accs = []
-### Test loss/accuracy
+# Test loss/accuracy
 test_losses = []
 test_accs = []
 best_test_acc = 0.
 try:
     for epoch in range(200):
-        ### One update of particles via all dataloader_train
-        for X, y in dataloader_train:
-            X = X.double().to(device=device).view(X.shape[0], -1)
+        # One update of particles via all dataloader_train
+        for x, y in dataloader_train:
+            x = x.double().to(device=device).view(x.shape[0], -1)
             y = y.to(device=device)
 
-            predicts = net(X)
+            predicts = net(x)
             loss = torch.nn.CrossEntropyLoss()(predicts, y)
 
             optim.zero_grad()
             loss.backward()
             optim.step()
 
-        ### Evaluate cross entropy and accuracy over dataloader_train
+        # Evaluate cross entropy and accuracy over dataloader_train
         train_loss = 0.
         train_acc = 0.
-        for X_train, y_train in dataloader_train:
-            X_train = X_train.double().to(device=device).view(X_train.shape[0], -1)
+        for x_train, y_train in dataloader_train:
+            x_train = x_train.double().to(device=device).view(x_train.shape[0], -1)
             y_train = y_train.to(device=device)
 
-            predicts = net(X_train)
+            predicts = net(x_train)
 
             y_pred = torch.argmax(nn.Softmax()(predicts), dim=1)
             train_loss += nn.CrossEntropyLoss(reduction='sum')(predicts, y_train)
@@ -128,14 +128,14 @@ try:
         train_loss /= (len(dataloader_train.dataset) + 0.)
         train_acc /= (len(dataloader_train.dataset) + 0.)
 
-        ### Evaluate cross entropy and accuracy over dataloader_test
+        # Evaluate cross entropy and accuracy over dataloader_test
         test_loss = 0.
         test_acc = 0.
-        for X_test, y_test in dataloader_test:
-            X_test = X_test.double().to(device=device).view(X_test.shape[0], -1)
+        for x_test, y_test in dataloader_test:
+            x_test = x_test.double().to(device=device).view(x_test.shape[0], -1)
             y_test = y_test.to(device=device)
 
-            predicts = net(X_test)
+            predicts = net(x_test)
 
             y_pred = torch.argmax(nn.Softmax()(predicts), dim=1)
             test_loss += nn.CrossEntropyLoss(reduction='sum')(predicts, y_test)
@@ -143,8 +143,7 @@ try:
         test_loss /= (len(dataloader_test.dataset) + 0.)
         test_acc /= (len(dataloader_test.dataset) + 0.)
 
-
-        ### Append evaluated losses and accuracies
+        # Append evaluated losses and accuracies
         train_losses.append(train_loss.data[0].cpu().numpy())
         train_accs.append(train_acc.data[0].cpu().numpy())
         test_losses.append(test_loss.data[0].cpu().numpy())
@@ -187,6 +186,6 @@ print_plots([[train_losses, test_losses],
              ['Accuracy (Train)', 'Accuracy (Test)']
              ],
             plots_file_name.format(0, 199)
-    )
+            )
 if checkpoint_file_name is not None:
     torch.save(net.state_dict(), checkpoint_file_name.format(0, 199))

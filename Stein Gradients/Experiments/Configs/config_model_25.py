@@ -32,24 +32,24 @@ Params:
 """
 
 use_cuda = True
-cuda_device_id = 6
+cuda_device_id = 7
 dataset = 'MNIST'
 batch_size = 100
 net_arc = 'fc-300-100'
 use_var_prior = False
 alpha = None
-n_particles = 10
+n_particles = 5
 use_latent = True
 n_hidden_dims = 1000
-experiment_name = 'model_10'
+experiment_name = 'model_25'
 version = 0
-n_epochs = 146
-n_epochs_save = 100
+n_epochs = 200
+n_epochs_save = 20
 n_epochs_log = 1
-move_theta_0 = True
+move_theta_0 = False
 n_warmup_epochs = 10
 n_previous = 6
-use_initializer = False
-initializer_name = None
-init_theta_0 = False
-comment = ''
+use_initializer = True
+initializer_name = ('./Checkpoints/' + 'e{0}-{1}_' + 'ml_est' + '.pth').format(0, 35)
+init_theta_0 = True
+comment = 'Use ML initialization'

@@ -6,31 +6,32 @@ import importlib
 workbook = xlsxwriter.Workbook('Results.xlsx')
 worksheets = [workbook.add_worksheet(), workbook.add_worksheet()]
 
-experiments_name = [
-    'model_1',
-    'model_2',
-    'model_3',
-    'model_4',
-    'model_5',
-    'model_6',
-    'model_7',
-    'model_8',
-    'model_9',
-#    'model_10',  # failed
-    'model_11',  # aka map estimate
-    'model_12',
-    'model_13',
-    'model_14',
-    'model_15',
-    'model_16',
-    'model_17',
-    'model_18',
-    'model_19',
-    'model_20',
-    'model_21',
-    'model_22',
-    'model_23',
-    'ml_est'
+# Name and colour of the corresponding row
+experiments = [
+    ('model_1', None),
+    ('model_2', None),
+    ('model_3', None),
+    ('model_4', None),
+    ('model_5', None),
+    ('model_6', None),
+    ('model_7', None),
+    ('model_8', None),
+    ('model_9', None),
+    ('model_10', None),  # 146 epochs
+    ('model_11', '#74FC74'),  # aka map estimate
+    ('model_12', '#FCF567'),
+    ('model_13', '#FCF567'),
+    ('model_14', '#FCF567'),
+    ('model_15', '#FCF567'),
+    ('model_16', None),
+    ('model_17', None),
+    ('model_18', None),
+    ('model_19', None),
+    ('model_20', '#FCAC67'),
+    ('model_21', '#FCAC67'),
+    ('model_22', '#FCAC67'),
+    ('model_23', '#FCAC67'),
+    ('ml_est', None)     # ml estimation
 ]
 
 column_names = [
@@ -88,10 +89,11 @@ def to_field(name):
 
 field_names = [to_field(name) for name in column_names]
 
-Result = namedtuple('Result', field_names, verbose=True)
+Result = namedtuple('Result', field_names, verbose=False)
 data = []
 
-for exp_name in experiments_name:
+# Get data from config and log files
+for exp_name, _ in experiments:
     log_file_name = './Logs/' + exp_name + '.txt'
     averaged = False
     if exp_name.find('model') >= 0:
@@ -140,30 +142,34 @@ for exp_name in experiments_name:
                            ba_tr, ba_t, ba_tm, ba_tmn,
                            config.comment
                            )
-                        )
+                    )
 
-# Start from the first cell. Rows and columns are zero indexed.
-row = 0
-col = 0
-
-
-right_align = workbook.add_format({'align': 'right'})
 # Iterate over the data and write it out row by row.
 for idx, result in enumerate(data):
+    if experiments[idx][1] is not None:
+        colorize = workbook.add_format({'bg_color': experiments[idx][1]})
+    else:
+        colorize = workbook.add_format({})
+
+    if experiments[idx][1] is not None:
+        right_align = workbook.add_format({'align': 'right', 'bg_color': experiments[idx][1]})
+    else:
+        right_align = workbook.add_format({'align': 'right'})
+
     for jdx, name in enumerate(column_names):
         if type(getattr(result, to_field(name))) == bool:
             bool_str = str(getattr(result, to_field(name))).upper()
             worksheets[0].write(idx + 1, jdx, bool_str, right_align)
         else:
-            worksheets[0].write(idx + 1, jdx, getattr(result, to_field(name)))
+            worksheets[0].write(idx + 1, jdx, getattr(result, to_field(name)), colorize)
     for jdx, name in enumerate(squeezed_column_names):
         if type(getattr(result, to_field(name))) == bool:
             bool_str = str(getattr(result, to_field(name))).upper()
             worksheets[1].write(idx + 1, jdx, bool_str, right_align)
         else:
-            worksheets[1].write(idx + 1, jdx, getattr(result, to_field(name)))
+            worksheets[1].write(idx + 1, jdx, getattr(result, to_field(name)), colorize)
 
-# Write a total using a formula.
+# Write head of the table
 for idx, name in enumerate(column_names):
     worksheets[0].set_column(idx, idx, len(name))
     worksheets[0].write(0, idx, name)

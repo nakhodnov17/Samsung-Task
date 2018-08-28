@@ -44,6 +44,7 @@ t_type = torch.float64
 
 print('utils.py was imported.')
 
+
 def deprecated(func):
     """This is a decorator which can be used to mark functions
     as deprecated. It will result in a warning being emitted
@@ -62,11 +63,11 @@ def deprecated(func):
 
 
 def print_plots(data, axis, labels, file_name=None):
-    N_plots = len(data)
-    plt.figure(figsize=(30, (N_plots // 3 + 1) * 10))
+    n_plots = len(data)
+    plt.figure(figsize=(30, (n_plots // 3 + 1) * 10))
 
     for idx in range(len(data)):
-        plt.subplot(N_plots // 3 + 1, 3, idx + 1)
+        plt.subplot(n_plots // 3 + 1, 3, idx + 1)
         for jdx in range(len(data[idx])):
             plt.plot(data[idx][jdx], label=labels[idx][jdx])
         plt.xlabel(axis[idx][0], fontsize=16)
@@ -76,7 +77,7 @@ def print_plots(data, axis, labels, file_name=None):
         plt.savefig(file_name)
 
 
-def plot_projections(dm=None, use_real=True, kernel='tri', pdf=None, N_plots_max=10):
+def plot_projections(dm=None, use_real=True, kernel='tri', pdf=None, n_plots_max=10):
     """
         Plot marginal kernel density estimation
     Args:
@@ -84,32 +85,28 @@ def plot_projections(dm=None, use_real=True, kernel='tri', pdf=None, N_plots_max
         use_real (bool): If set to True then apply transformation dm.lt.transform before creating plot
         kernel (str): Kernel type for kernel density estimation
         pdf (array_like, None): Samples from target distribution
-        N_plots_max (int): Maximum number of plots
+        n_plots_max (int): Maximum number of plots
     """
-    N_plots = None
-    scale_factor = None
-
     if use_real:
         if not dm.use_latent:
             return
-        N_plots = dm.lt.A.shape[0]
+        n_plots = dm.lt.A.shape[0]
     else:
-        N_plots = dm.particles.shape[0]
-    if N_plots > 6:
+        n_plots = dm.particles.shape[0]
+    if n_plots > 6:
         scale_factor = 15
     else:
         scale_factor = 5
 
-    N_plots = min(N_plots, N_plots_max)
+    n_plots = min(n_plots, n_plots_max)
 
-    plt.figure(figsize=(3 * scale_factor, (N_plots // 3 + 1) * scale_factor))
+    plt.figure(figsize=(3 * scale_factor, (n_plots // 3 + 1) * scale_factor))
 
-    for idx in range(N_plots):
+    for idx in range(n_plots):
         slice_dim = idx
 
-        plt.subplot(N_plots // 3 + 1, 3, idx + 1)
+        plt.subplot(n_plots // 3 + 1, 3, idx + 1)
 
-        particles = None
         if use_real:
             particles = dm.lt.transform(dm.particles, n_particles_second=True).t()[:, slice_dim]
         else:
@@ -150,17 +147,20 @@ def plot_condition_distribution(dm, n_samples):
 def pairwise_diffs(x, y, n_particles_second=True):
     """
     Args:
+        x (2D array_like)
+        y (2D array_like)
+        n_particles_second (bool)
         if n_particles_second == True:
-            Input: x is a dxN matrix
-                   y is an optional dxM matrix
-            Output: diffs is a dxNxM matrix where diffs[i,j] is the subtraction between x[:,i] and y[:,j]
-            i.e. diffs[i,j] = x[:,i] - y[:,j]
+            x is a dxN matrix
+            y is an optional dxM matrix
+            Output - diffs is a dxNxM matrix where diffs[i,j] is the subtraction between x[:,i] and y[:,j]
+                    i.e. diffs[i,j] = x[:,i] - y[:,j]
 
         if n_particles_second == False:
-            Input: x is a Nxd matrix
-                   y is an optional Mxd matrix
-            Output: diffs is a NxMxd matrix where diffs[i,j] is the subtraction between x[i,:] and y[j,:]
-            i.e. diffs[i,j] = x[i,:]-y[j,:]
+            x is a Nxd matrix
+            y is an optional Mxd matrix
+            Output - diffs is a NxMxd matrix where diffs[i,j] is the subtraction between x[i,:] and y[j,:]
+                    i.e. diffs[i,j] = x[i,:]-y[j,:]
     """
     if n_particles_second:
         return x[:, :, np.newaxis] - y[:, np.newaxis, :]
@@ -170,22 +170,24 @@ def pairwise_diffs(x, y, n_particles_second=True):
 def pairwise_dists(diffs=None, n_particles_second=True):
     """
     Args:
+        diffs (2D or 3D array_like)
+        n_particles_second (bool)
         if n_particles_second == True:
-            Input: diffs is a dxNxM matrix where diffs[i,j] = x[:,i] - y[:,j]
-            Output: dist is a NxM matrix where dist[i,j] is the square norm of diffs[i,j]
-            i.e. dist[i,j] = ||x[:,i] - y[:,j]||
+            diffs is a dxNxM matrix where diffs[i,j] = x[:,i] - y[:,j]
+            Output - dist is a NxM matrix where dist[i,j] is the square norm of diffs[i,j]
+                    i.e. dist[i,j] = ||x[:,i] - y[:,j]||
 
         if n_particles_second == False:
-            Input: diffs is a NxMxd matrix where diffs[i,j] = x[i,:] - y[j, :]
-            Output: dist is a NxM matrix where dist[i,j] is the square norm of diffs[i,j]
-            i.e. dist[i,j] = ||x[i,:]-y[j,:]||
+            diffs is a NxMxd matrix where diffs[i,j] = x[i,:] - y[j, :]
+            Output - dist is a NxM matrix where dist[i,j] is the square norm of diffs[i,j]
+                i.e. dist[i,j] = ||x[i,:]-y[j,:]||
     """
     if n_particles_second:
         return torch.norm(diffs, dim=0)
     return torch.norm(diffs, dim=2)
 
 
-class normal_density():
+class NormalDensity:
     """
         Multinomial normal density for independent random variables.
     """
@@ -252,9 +254,9 @@ class normal_density():
         self.two = torch.tensor(2., dtype=t_type, device=device)
         self.pi = torch.tensor(math.pi, dtype=t_type, device=device)
 
-        ### specify axis to reduce
-        ### if n_particles_second == True - n_axis == 0
-        ### if n_particles_second == False - n_axis == 1
+        # specify axis to reduce
+        # if n_particles_second == True - n_axis == 0
+        # if n_particles_second == False - n_axis == 1
         self.n_axis = 1 - int(self.n_particles_second)
 
     def __call__(self, x, n_axis=None):
@@ -324,7 +326,7 @@ class normal_density():
             return sample.view(1, -1)
 
 
-class gamma_density():
+class GammaDensity:
     """
         Multinomial gamma density for independent random variables.
     """
@@ -388,14 +390,14 @@ class gamma_density():
         self.one = torch.tensor(1., dtype=t_type, device=device)
         self.two = torch.tensor(2., dtype=t_type, device=device)
 
-        ### specify axis to reduce
-        ### if n_particles_second == True - n_axis == 0
-        ### if n_particles_second == False - n_axis == 1
+        # specify axis to reduce
+        # if n_particles_second == True - n_axis == 0
+        # if n_particles_second == False - n_axis == 1
         self.n_axis = 1 - int(self.n_particles_second)
 
-        ### log Г(alpha)
+        # log Г(alpha)
         self.lgamma = torch.lgamma(self.alpha)
-        ### Г(alpha)
+        # Г(alpha)
         self.gamma = torch.exp(self.lgamma)
 
     def __call__(self, x, n_axis=None):
@@ -460,7 +462,7 @@ class gamma_density():
         """
             Evaluate log density in point log(x)
         Args:
-            x (torch.tensor): tensor which defines point where log density is evaluated
+            log_x (torch.tensor): tensor which defines point where log density is evaluated
             n_axis (int): specify axis to reduce
                 Default:
                     if n_particles_second == True - n_axis == 0
@@ -475,7 +477,7 @@ class gamma_density():
         """
             Evaluate log unnormed density in point log(x)
         Args:
-            x (torch.tensor): tensor which defines point where log unnormed density is evaluated
+            log_x (torch.tensor): tensor which defines point where log unnormed density is evaluated
             n_axis (int): specify axis to reduce
                 Default:
                     if n_particles_second == True - n_axis == 0
@@ -519,10 +521,10 @@ class SteinLinear(nn.Module):
         self.use_bias = use_bias
         self.use_var_prior = use_var_prior
 
-        ### if alpha is None use GLOROT prior
+        # if alpha is None use GLOROT prior
         if alpha is None:
             self.alpha_weight = (self.in_features + self.out_features) / 2.
-            self.alpha_bias = (self.out_features) / 2.
+            self.alpha_bias = self.out_features / 2.
         else:
             self.alpha_weight = alpha
             self.alpha_bias = alpha
@@ -546,24 +548,24 @@ class SteinLinear(nn.Module):
                                                    requires_grad=False)
 
         if self.use_var_prior:
-            ### define prior on alpha p(a) = G(1e-4, 1e-4)
-            self.weight_alpha_log_prior = lambda x: (gamma_density(n=self.log_weight_alpha.shape[0],
-                                                                   alpha=1e-4,
-                                                                   betta=1e-4,
-                                                                   n_particles_second=True
-                                                                   ).log_unnormed_density_log_x(x))
+            # define prior on alpha p(a) = G(1e-4, 1e-4)
+            self.weight_alpha_log_prior = lambda x: (GammaDensity(n=self.log_weight_alpha.shape[0],
+                                                                  alpha=1e-4,
+                                                                  betta=1e-4,
+                                                                  n_particles_second=True
+                                                                  ).log_unnormed_density_log_x(x))
             if self.use_bias:
-                self.bias_alpha_log_prior = lambda x: (gamma_density(n=self.log_bias_alpha.shape[0],
-                                                                     alpha=1e-4,
-                                                                     betta=1e-4,
-                                                                     n_particles_second=True
-                                                                     ).log_unnormed_density_log_x(x))
+                self.bias_alpha_log_prior = lambda x: (GammaDensity(n=self.log_bias_alpha.shape[0],
+                                                                    alpha=1e-4,
+                                                                    betta=1e-4,
+                                                                    n_particles_second=True
+                                                                    ).log_unnormed_density_log_x(x))
 
         self.one = torch.tensor(1., dtype=t_type, device=device)
 
         self.reset_parameters()
 
-    ### useless function - all initialization defined in DistributionMover class
+    # useless function - all initialization defined in DistributionMover class
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.out_features)
         self.weight.data.uniform_(-stdv, stdv)
@@ -572,19 +574,19 @@ class SteinLinear(nn.Module):
             self.bias.data.uniform_(-stdv, stdv)
             self.log_bias_alpha.data.uniform_(-stdv, stdv)
 
-    def forward(self, X):
+    def forward(self, x):
         """
-            Apply transformation: X_out[i, :, :] = X_in[i, :, :] * W + b[i]
+            Apply transformation: x_out[i, :, :] = x_in[i, :, :] * W + b[i]
         Args:
-            X (torch.tensor): tensor
+            x (torch.tensor): tensor
         Shape:
             Input: [n_particles, batch_size, in_features]
             Output: [n_particles, batch_size, out_features]
         """
-        ### NEED SOME OPTIMIZATION TO OMMIT .permute
+        # NEED SOME OPTIMIZATION TO OMMIT .permute
         if self.use_bias:
-            return torch.bmm(X, self.weight.permute(2, 0, 1)) + self.bias.permute(2, 0, 1)
-        return torch.bmm(X, self.weight.permute(2, 0, 1))
+            return torch.bmm(x, self.weight.permute(2, 0, 1)) + self.bias.permute(2, 0, 1)
+        return torch.bmm(x, self.weight.permute(2, 0, 1))
 
     def numel(self, trainable=True):
         """
@@ -603,18 +605,18 @@ class SteinLinear(nn.Module):
             Evaluate log prior of trainable parameters
         log p(w,a) = log p(w|a) + log p(a)
         """
-        ### define prior on weight p(w|a) = N(0, 1 / alpha)
-        weight_log_prior = lambda x: (normal_density(n=self.weight.numel() // self.n_particles,
-                                                     mu=0.,
-                                                     std=self.one / torch.exp(self.log_weight_alpha),
-                                                     n_particles_second=True
-                                                     ).log_unnormed_density(x))
+        # define prior on weight p(w|a) = N(0, 1 / alpha)
+        weight_log_prior = lambda x: (NormalDensity(n=self.weight.numel() // self.n_particles,
+                                                    mu=0.,
+                                                    std=self.one / torch.exp(self.log_weight_alpha),
+                                                    n_particles_second=True
+                                                    ).log_unnormed_density(x))
 
-        bias_log_prior = lambda x: (normal_density(self.bias.numel() // self.n_particles,
-                                                   mu=0.,
-                                                   std=self.one / torch.exp(self.log_bias_alpha),
-                                                   n_particles_second=True
-                                                   ).log_unnormed_density(x))
+        bias_log_prior = lambda x: (NormalDensity(self.bias.numel() // self.n_particles,
+                                                  mu=0.,
+                                                  std=self.one / torch.exp(self.log_bias_alpha),
+                                                  n_particles_second=True
+                                                  ).log_unnormed_density(x))
 
         if self.use_bias:
             if self.use_var_prior:
@@ -631,7 +633,7 @@ class SteinLinear(nn.Module):
         return weight_log_prior(self.weight.view(-1, self.n_particles))
 
 
-class LinearTransform():
+class LinearTransform:
     """
         Class for various linear transformations
     """
@@ -665,18 +667,18 @@ class LinearTransform():
             self.A = torch.zeros([self.n_dims, self.n_hidden_dims], dtype=t_type, device=device)
             self.A.uniform_(-1., 1.)
             if self.normalize:
-                ### normalize columns of matrix A
+                # normalize columns of matrix A
                 self.A = torch.tensor(orth(self.A.data.cpu().numpy()), dtype=t_type, device=device)
 
         if self.theta_0 is None:
             self.theta_0 = torch.zeros([self.n_dims, 1], dtype=t_type, device=device)
             self.theta_0.uniform_(-1., 1.)
 
-        ### A^(t)A
+        # A^(t)A
         self.AtA = torch.matmul(self.A.t(), self.A)
-        ### (A^(t)A)^(-1)
+        # (A^(t)A)^(-1)
         self.AtA_1 = torch.inverse(self.AtA)
-        ### (A^(t)A)^(-1)A^(t)
+        # (A^(t)A)^(-1)A^(t)
         self.inverse_base = torch.matmul(self.AtA_1, self.A.t())
 
     def transform(self, theta, n_particles_second=True):
@@ -708,8 +710,8 @@ class LinearTransform():
         """
         if self.use_identity:
             return theta
-        ### This optimization severely reduces performance!!!!
-        ### use solver trick: theta_s_p_i : A^(t)Atheta_s_p_i = A^(t)theta
+        # This optimization severely reduces performance!!!!
+        # use solver trick: theta_s_p_i : A^(t)Atheta_s_p_i = A^(t)theta
         if n_particles_second:
             # return torch.gesv(torch.matmul(self.A.t(), theta), self.AtA)[0]
             return torch.matmul(self.inverse_base, theta)
@@ -772,28 +774,28 @@ class RegressionDistribution(nn.Module):
         self.use_var_prior = use_var_prior
         self.betta = betta
 
-        ### define betta - variance of data distribution for regression tasks (betta = 1 / std ** 2)
+        # define betta - variance of data distribution for regression tasks (betta = 1 / std ** 2)
         if self.use_var_prior:
             self.log_betta = torch.nn.Parameter(torch.zeros([1, self.n_particles], dtype=t_type, device=device))
         else:
             self.log_betta = torch.tensor([math.log(self.betta)], dtype=t_type, device=device, requires_grad=False)
 
         if self.use_var_prior:
-            ### define prior on betta p(betta)
-            self.betta_log_prior = lambda x: (gamma_density(n=1,
-                                                            alpha=1e-4,
-                                                            betta=1e-4,
-                                                            n_particles_second=True
-                                                            ).log_unnormed_density_log_x(x))
+            # define prior on betta p(betta)
+            self.betta_log_prior = lambda x: (GammaDensity(n=1,
+                                                           alpha=1e-4,
+                                                           betta=1e-4,
+                                                           n_particles_second=True
+                                                           ).log_unnormed_density_log_x(x))
 
-        ### Support tensors for computations
+        # Support tensors for computations
         self.one = torch.tensor(1., dtype=t_type, device=device)
 
-    def calc_log_data(self, X, y, y_predict, train_size):
+    def calc_log_data(self, x, y, y_predict, train_size):
         """
             Evaluate log p(theta)
         Args:
-            X (array_like): batch of data
+            x (array_like): batch of data
             y (array_like): batch of target values
             y_predict (array_like): batch of predicted values
             train_size (int) - size of training dataset
@@ -801,28 +803,27 @@ class RegressionDistribution(nn.Module):
             y.shape = [batch_size]
             y_predict.shape = [n_particles, batch_size, 1]
         """
-        ### squeeze last axis because regression task is being solved
+        # squeeze last axis because regression task is being solved
         y_predict.squeeze_(2)
 
         batch_size = torch.tensor(y.shape[0], dtype=t_type, device=device)
         train_size = torch.tensor(train_size, dtype=t_type, device=device)
 
-        ### define distribution over data p(D|w)
-        ### n_particles_second == False because y_predict has shape = [n_particles, batch_size]
-        log_data_distr = None
+        # define distribution over data p(D|w)
+        # n_particles_second == False because y_predict has shape = [n_particles, batch_size]
         if self.use_var_prior:
-            log_data_distr = lambda x: (normal_density(n=X.shape[0],
-                                                       mu=y,
-                                                       std=self.one / torch.sqrt(torch.exp(
-                                                           self.log_betta.expand(X.shape[0], self.n_particles).t())),
-                                                       n_particles_second=False
-                                                       ).log_unnormed_density(x))
+            log_data_distr = lambda x: (NormalDensity(n=x.shape[0],
+                                                      mu=y,
+                                                      std=self.one / torch.sqrt(torch.exp(
+                                                          self.log_betta.expand(x.shape[1], self.n_particles).t())),
+                                                      n_particles_second=False
+                                                      ).log_unnormed_density(x))
         else:
-            log_data_distr = lambda x: (normal_density(n=X.shape[0],
-                                                       mu=y,
-                                                       std=self.one / torch.sqrt(torch.exp(self.log_betta)),
-                                                       n_particles_second=False
-                                                       ).log_unnormed_density(x))
+            log_data_distr = lambda x: (NormalDensity(n=x.shape[1],
+                                                      mu=y,
+                                                      std=self.one / torch.sqrt(torch.exp(self.log_betta)),
+                                                      n_particles_second=False
+                                                      ).log_unnormed_density(x))
 
         if self.use_var_prior:
             return train_size / batch_size * log_data_distr(y_predict) + self.betta_log_prior(self.log_betta)
@@ -853,24 +854,25 @@ class ClassificationDistribution(nn.Module):
         """
         self.n_particles = n_particles
 
-    def calc_log_data(self, X, y, y_predict, train_size):
+    @staticmethod
+    def calc_log_data(x, y, y_predict, train_size):
         """
             Evaluate log p(theta)
         Args:
-            X (array_like): batch of data
+            x (array_like): batch of data
             y (array_like): batch of target values
             y_predict (array_like): batch of predictions
             train_size (int): size of train dataset
         Shapes:
-            X.shape = [batch_size, in_features]
+            x.shape = [batch_size, in_features]
             y.shape = [batch_size]
             y_predict.shape = [n_particles, batch_size, n_classes]
         """
-        batch_size = torch.tensor(X.shape[0], dtype=t_type, device=device)
+        batch_size = torch.tensor(x.shape[0], dtype=t_type, device=device)
         train_size = torch.tensor(train_size, dtype=t_type, device=device)
 
-        ### define distribution over data p(D|w)
-        ### n_particles_second == False because y_predict has shape = [n_particles, batch_size]
+        # define distribution over data p(D|w)
+        # n_particles_second == False because y_predict has shape = [n_particles, batch_size]
 
         probas = nn.LogSoftmax(dim=2)(y_predict)
         probas_selected = torch.gather(input=probas, dim=2,
@@ -918,11 +920,12 @@ class DistributionMover(nn.Module):
                 - solve classification task using net
             n_particles (int): number of particles
             particles (2D array_like): array which contains initialized particles
-            target_density (callable): computes probability density function of target distribution (only for 'app' task)
+            target_density (callable): computes probability density function of target distribution (for 'app' task)
             n_dims (int): dimension of the space where optimization is performed
             n_hidden_dims (int): dimension of the latent space
             use_latent (bool): If set to True, Subspace Stein is used
-            acr (list): List contains arcitecture of object which is used to make predictions (for 'net_reg' and' net_class' tasks)
+            acr (list): List contains architecture of object which is used to 
+                        make predictions (for 'net_reg' and' net_class' tasks)
             precomputed_params (1D array_like): Precomputed parameters, which will be used for particles initialization
             data_distribution (callable): computes probability over data p(D|w) (for 'net_reg' and' net_class' tasks)
         """
@@ -944,14 +947,14 @@ class DistributionMover(nn.Module):
         if not self.use_latent:
             self.n_hidden_dims = self.n_dims
 
-        ### Learnable samples from the target distribution
+        # Learnable samples from the target distribution
         self.particles = torch.zeros(
             [self.n_hidden_dims, self.n_particles],
             dtype=t_type,
             requires_grad=False,
             device=device).uniform_(-2., 2.)
 
-        ### Class for performing linear transformations
+        # Class for performing linear transformations
         if self.use_latent:
             self.lt = LinearTransform(
                 n_dims=self.n_dims,
@@ -971,7 +974,7 @@ class DistributionMover(nn.Module):
             self.particles = self.lt.inverse_transform(
                 self.precomputed_params.unsqueeze(1).expand(self.n_dims, self.n_particles))
 
-        ### Functions of probability density of target distribution
+        # Functions of probability density of target distribution
         if self.net is None:
             # use unnormed probability density to speedup computations
             if target_density is not None:
@@ -979,26 +982,34 @@ class DistributionMover(nn.Module):
                 self.real_target_density = target_density
             else:
                 self.target_density = lambda x, *args, **kwargs: (
-                            0.3 * normal_density(self.n_dims, -2., 1., n_particles_second=True).unnormed_density(x,
-                                                                                                                 *args,
-                                                                                                                 **kwargs) +
-                            0.7 * normal_density(self.n_dims, 2., 1., n_particles_second=True).unnormed_density(x,
+                            0.3 * NormalDensity(self.n_dims, -2., 1., n_particles_second=True).unnormed_density(x,
                                                                                                                 *args,
-                                                                                                                **kwargs))
+                                                                                                                **kwargs
+                                                                                                                ) +
+                            0.7 * NormalDensity(self.n_dims, 2., 1., n_particles_second=True).unnormed_density(x,
+                                                                                                               *args,
+                                                                                                               **kwargs
+                                                                                                               )
+                )
 
                 self.real_target_density = lambda x, *args, **kwargs: (
-                            0.3 * normal_density(self.n_dims, -2., 1., n_particles_second=True)(x, *args, **kwargs) +
-                            0.7 * normal_density(self.n_dims, 2., 1., n_particles_second=True)(x, *args, **kwargs))
+                            0.3 * NormalDensity(self.n_dims, -2., 1., n_particles_second=True)(x, *args, **kwargs) +
+                            0.7 * NormalDensity(self.n_dims, 2., 1., n_particles_second=True)(x, *args, **kwargs)
+                )
 
-        ### Number of iterations since beginning
+        # Number of iterations since beginning
         self.iter = 0
+        # Number of epochs since beginning
+        self.epoch = 0
+        # Burn in coefficient for grag kernel term
+        self.burn_in_coeff = 0
 
-        ### Adagrad parameters
+        # Adagrad parameters
         self.fudge_factor = torch.tensor(1e-6, dtype=t_type, device=device)
         self.step_size = torch.tensor(1e-2, dtype=t_type, device=device)
         self.auto_corr = torch.tensor(0.9, dtype=t_type, device=device)
 
-        ### Gradient history term for adagrad optimization
+        # Gradient history term for adagrad optimization
         if self.use_latent:
             self.historical_grad = torch.zeros(
                 [self.n_hidden_dims, n_particles], dtype=t_type, device=device)
@@ -1008,10 +1019,10 @@ class DistributionMover(nn.Module):
             self.historical_grad = torch.zeros(
                 [self.n_dims, n_particles], dtype=t_type, device=device)
 
-        ### Factor from kernel
+        # Factor from kernel
         self.h = torch.tensor(0., dtype=t_type, device=device)
 
-        ### Support tensors for computations
+        # Support tensors for computations
         self.N = torch.tensor(self.n_particles, dtype=t_type, device=device)
         self.one = torch.tensor(1., dtype=t_type, device=device)
         self.two = torch.tensor(2., dtype=t_type, device=device)
@@ -1059,16 +1070,16 @@ class DistributionMover(nn.Module):
             Output:
                 ([n_particles, n_particles], [n_dims, n_particles, n_particles])
         """
-        ### power for rational kernel
+        # power for rational kernel
         p = torch.tensor(p, dtype=t_type, device=device) if p is not None else None
 
-        ### theta = Atheta` + theta_0
+        # theta = Atheta` + theta_0
         real_particles = self.lt.transform(self.particles, n_particles_second=True)
-        ### diffs[i, j] = A(theta`_i - theta`_j)
+        # diffs[i, j] = A(theta`_i - theta`_j)
         diffs = pairwise_diffs(real_particles, real_particles, n_particles_second=True)
-        ### dists[i, j] = ||A(theta`_i - theta`_j)||
+        # dists[i, j] = ||A(theta`_i - theta`_j)||
         dists = pairwise_dists(diffs=diffs, n_particles_second=True)
-        ### sq_dists[i, j] = ||A(theta`_i - theta`_j)||^2
+        # sq_dists[i, j] = ||A(theta`_i - theta`_j)||^2
         sq_dists = torch.pow(dists, self.two)
 
         if type(h_type) == float:
@@ -1078,7 +1089,7 @@ class DistributionMover(nn.Module):
             self.h = med / torch.log(self.N + 1)
         elif h_type == 1:
             med = torch.median(sq_dists) + self.fudge_factor
-            self.h = med / torch.log(self.N + 1) * (self.n_dims)
+            self.h = med / torch.log(self.N + 1) * self.n_dims
         elif h_type == 2:
             med = torch.median(sq_dists) + self.fudge_factor
             self.h = med / torch.log(self.N + 1) * (2. * self.n_dims)
@@ -1087,7 +1098,7 @@ class DistributionMover(nn.Module):
             self.h = var / torch.log(self.N + 1.) * (2. * self.n_dims)
         elif h_type == 4:
             var = torch.var(diffs) + self.fudge_factor
-            self.h = var / torch.log(self.N + 1) * (self.n_dims)
+            self.h = var / torch.log(self.N + 1) * self.n_dims
         elif h_type == 5:
             med = torch.median(sq_dists) + self.fudge_factor
             self.h = med / (torch.pow(self.N, self.two) - self.one)
@@ -1101,28 +1112,28 @@ class DistributionMover(nn.Module):
         kernel = None
         grad_kernel = None
         if kernel_type == 'rbf':
-            ### RBF Kernel:
-            ### kernel[i, j] = exp(-1/h * ||A(theta`_i - theta`_j)||^2)
+            # RBF Kernel:
+            # kernel[i, j] = exp(-1/h * ||A(theta`_i - theta`_j)||^2)
             kernel = torch.exp(-self.one / self.h * sq_dists)
-            ### grad_kernel[i, j] = -2/h * A(theta`_i - theta`_j) * kernel[i, j]
+            # grad_kernel[i, j] = -2/h * A(theta`_i - theta`_j) * kernel[i, j]
             grad_kernel = -self.two / self.h * kernel.unsqueeze(0) * diffs
         elif kernel_type == 'imq':
-            ### IMQ Kernel:
-            ### kernel[i, j] = (1 + 1/h * ||A(theta`_i - theta`_j)||^2)^(-1/2)
+            # IMQ Kernel:
+            # kernel[i, j] = (1 + 1/h * ||A(theta`_i - theta`_j)||^2)^(-1/2)
             kernel = torch.pow(self.one + self.one / self.h * sq_dists, -self.one / self.two)
-            ### grad_kernel[i, j] = -1/h * A(theta`_i - theta`_j) * kernel^(3)[i, j]
+            # grad_kernel[i, j] = -1/h * A(theta`_i - theta`_j) * kernel^(3)[i, j]
             grad_kernel = -self.one / self.h * torch.pow(kernel, self.three).unsqueeze(0) * diffs
         elif kernel_type == 'exp':
-            ### Exponential Kernel:
-            ### kernel[i, j] = exp(1/h * <Atheta`_i + theta_0, Atheta`_j + theta_0>)
+            # Exponential Kernel:
+            # kernel[i, j] = exp(1/h * <Atheta`_i + theta_0, Atheta`_j + theta_0>)
             kernel = torch.exp(self.one / self.h * torch.matmul(real_particles.t(), real_particles))
-            ### grad_kernel[i, j] = 1/h * (Atheta`_j + theta_0) * kernel[i, j]
+            # grad_kernel[i, j] = 1/h * (Atheta`_j + theta_0) * kernel[i, j]
             grad_kernel = 1. / self.h * kernel.unsqueeze(0) * real_particles.unsqueeze(1)
         elif kernel_type == 'rat':
-            ### RAT Kernel:
-            ### kernel[i, j] = (1 + 1/h * ||A(theta`_i - theta`_j)||^2)^(p)
+            # RAT Kernel:
+            # kernel[i, j] = (1 + 1/h * ||A(theta`_i - theta`_j)||^2)^(p)
             kernel = torch.pow(self.one + self.one / self.h * sq_dists, p)
-            ### grad_kernel[i, j] = p/h * A(theta`_i - theta`_j) * kernel^((p - 1)/p)[i, j]
+            # grad_kernel[i, j] = p/h * A(theta`_i - theta`_j) * kernel^((p - 1)/p)[i, j]
             grad_kernel = p / self.h * torch.pow(kernel, (self.p - self.one) / p).unsqueeze(0) * diffs
 
         return kernel, grad_kernel
@@ -1175,12 +1186,12 @@ class DistributionMover(nn.Module):
             Output: [n_dims, n_particles]
         """
 
-        ### theta = A theta` + theta_0
+        # theta = A theta` + theta_0
         real_particles = self.lt.transform(self.particles.detach(), n_particles_second=True).requires_grad_(True)
-        ### compute log data term log p(D|w)
+        # compute log data term log p(D|w)
         log_term = torch.log(self.target_density(real_particles))
 
-        ### evaluate gradient with respect to trainable parameters
+        # evaluate gradient with respect to trainable parameters
         for idx in range(self.n_particles):
             log_term[idx].backward(retain_graph=True)
 
@@ -1188,11 +1199,11 @@ class DistributionMover(nn.Module):
 
         return grad_log_term
 
-    def calc_log_term_latent_net(self, X, y, train_size):
+    def calc_log_term_latent_net(self, x, y, train_size):
         """
             Calculate grad(log p(theta))
         Args:
-            X (torch.tensor): batch of data
+            x (torch.tensor): batch of data
             y (torch.tensor): batch of predictions
             train_size (int): size of train dataset
         Shape:
@@ -1202,29 +1213,27 @@ class DistributionMover(nn.Module):
             Output:
                 [n_dims, n_particles]
         """
-        log_data = torch.zeros([self.n_particles], dtype=t_type, device=device)
-        log_prior = torch.zeros([self.n_particles], dtype=t_type, device=device)
 
-        ### get real net parameters: theta_i = A theta`_i + theta_0
+        # get real net parameters: theta_i = A theta`_i + theta_0
         real_particles = self.lt.transform(self.particles, n_particles_second=True)
-        ### init net with real parameters
+        # init net with real parameters
         self.vector_to_parameters(real_particles.view(-1), self.parameters_net())
-        ### compute log prior of all weight in the net
+        # compute log prior of all weight in the net
         log_prior = self.calc_log_prior_net()
 
-        ### get prediction for the batch of data
-        y_predict = self.predict_net(X)
-        ### compute log data term log p(D|w)
-        log_data = self.data_distribution.calc_log_data(X, y, y_predict, train_size)
+        # get prediction for the batch of data
+        y_predict = self.predict_net(x)
+        # compute log data term log p(D|w)
+        log_data = self.data_distribution.calc_log_data(x, y, y_predict, train_size)
 
-        ### log_term = log p(theta) = log p_prior(theta) + log p_data(D|theta)
+        # log_term = log p(theta) = log p_prior(theta) + log p_data(D|theta)
         log_term = log_prior + log_data
 
-        ### evaluate gradient with respect to trainable parameters
+        # evaluate gradient with respect to trainable parameters
         for idx in range(self.n_particles):
             log_term[idx].backward(retain_graph=True)
 
-        ### collect all gradients into one vector
+        # collect all gradients into one vector
         grad_log_term = self.parameters_grad_to_vector(self.parameters_net()).view(-1, self.n_particles)
 
         return grad_log_term
@@ -1235,13 +1244,14 @@ class DistributionMover(nn.Module):
         """
         return chain(self.net.parameters(), self.data_distribution.parameters())
 
-    def predict_net(self, X, inference=False):
+    def predict_net(self, x, inference=False):
         """
             Use net to make predictions
             Args:
-                X (array_like): batch of data
+                x (array_like): batch of data
+                inference (bool): if False return logits instead of logp
         """
-        predictions = self.net(X.unsqueeze(0).expand(self.n_particles, *X.shape))
+        predictions = self.net(x.unsqueeze(0).expand(self.n_particles, *x.shape))
         if self.task == 'net_reg':
             if inference:
                 return torch.mean(predictions, dim=0)
@@ -1270,48 +1280,48 @@ class DistributionMover(nn.Module):
 
         self.iter += 1
 
-        ### Compute additional terms
+        # Compute additional terms
         kernel, grad_kernel = self.calc_kernel_term_latent(h_type, kernel_type, p)
         grad_log_term = self.calc_log_term_latent()
 
-        ### Increase grad_log_term in burn_in_coeff times
+        # Increase grad_log_term in burn_in_coeff times
         grad_log_term *= self.burn_in_coeff
 
-        ### Compute value of step in functional space
+        # Compute value of step in functional space
         phi = (torch.matmul(grad_log_term, kernel) + torch.sum(grad_kernel, dim=1)) / self.N
 
-        ### Transform phi from R^D space to R^d space: phi` = (A^(t)A)^(-1)A^(t)phi
+        # Transform phi from R^D space to R^d space: phi` = (A^(t)A)^(-1)A^(t)phi
         phi = self.lt.project_inverse(phi, n_particles_second=True)
 
-        ### Update gradient history
+        # Update gradient history
         if self.iter == 1:
             self.historical_grad = self.historical_grad + phi * phi
         else:
             self.historical_grad = self.auto_corr * self.historical_grad + (self.one - self.auto_corr) * phi * phi
 
-        ### Adjust gradient and make step
+        # Adjust gradient and make step
         adj_phi = phi / (self.fudge_factor + torch.sqrt(self.historical_grad))
         self.particles = self.particles + self.step_size * adj_phi
 
-        ### Update theta_0 in LinearTransform
+        # Update theta_0 in LinearTransform
         if self.use_latent and move_theta_0:
-            ### Compute value of step in functional space
+            # Compute value of step in functional space
             theta_0_update = torch.mean(grad_log_term, dim=1).view(-1, 1)
 
-            ### Update gradient history
+            # Update gradient history
             if self.iter == 1:
                 self.historical_grad_theta_0 = self.historical_grad_theta_0 + theta_0_update * theta_0_update
             else:
                 self.historical_grad_theta_0 = self.auto_corr * self.historical_grad_theta_0 + (
                             self.one - self.auto_corr) * theta_0_update * theta_0_update
 
-            ### Adjust gradient and make step
+            # Adjust gradient and make step
             adj_theta_0_update = theta_0_update / (self.fudge_factor + torch.sqrt(self.historical_grad_theta_0))
             self.lt.theta_0 = self.lt.theta_0 + self.step_size * adj_theta_0_update
 
     def update_latent_net(self,
                           h_type, kernel_type='rbf', p=None,
-                          X_batch=None, y_batch=None, train_size=None,
+                          x_batch=None, y_batch=None, train_size=None,
                           step_size=None,
                           move_theta_0=False,
                           burn_in=False, burn_in_coeff=None,
@@ -1329,42 +1339,42 @@ class DistributionMover(nn.Module):
         self.net.zero_grad()
         self.data_distribution.zero_grad()
 
-        ### Compute additional terms
+        # Compute additional terms
         kernel, grad_kernel = self.calc_kernel_term_latent_net(h_type, kernel_type, p)
-        grad_log_term = self.calc_log_term_latent_net(X_batch, y_batch, train_size)
+        grad_log_term = self.calc_log_term_latent_net(x_batch, y_batch, train_size)
 
-        ### Increase grad_log_term in burn_in_coeff times
+        # Increase grad_log_term in burn_in_coeff times
         grad_log_term *= self.burn_in_coeff
 
-        ### Compute value of step in functional space
+        # Compute value of step in functional space
         phi = (torch.matmul(grad_log_term, kernel) + torch.sum(grad_kernel, dim=1)) / self.N
 
-        ### Transform phi from R^D space to R^d space: phi` = (A^(t)A)^(-1)A^(t)phi
+        # Transform phi from R^D space to R^d space: phi` = (A^(t)A)^(-1)A^(t)phi
         phi = self.lt.project_inverse(phi, n_particles_second=True)
 
-        ### Update gradient history
+        # Update gradient history
         if self.iter == 1:
             self.historical_grad = self.historical_grad + phi * phi
         else:
             self.historical_grad = self.auto_corr * self.historical_grad + (self.one - self.auto_corr) * phi * phi
 
-        ### Adjust gradient and make step
+        # Adjust gradient and make step
         adj_phi = phi / (self.fudge_factor + torch.sqrt(self.historical_grad))
         self.particles = self.particles + self.step_size * adj_phi
 
-        ### Update theta_0 in LinearTransform
+        # Update theta_0 in LinearTransform
         if self.use_latent and move_theta_0:
-            ### Compute value of step in functional space
+            # Compute value of step in functional space
             theta_0_update = torch.mean(grad_log_term, dim=1).view(-1, 1)
 
-            ### Update gradient history
+            # Update gradient history
             if self.iter == 1:
                 self.historical_grad_theta_0 = self.historical_grad_theta_0 + theta_0_update * theta_0_update
             else:
                 self.historical_grad_theta_0 = self.auto_corr * self.historical_grad_theta_0 + (
                             self.one - self.auto_corr) * theta_0_update * theta_0_update
 
-            ### Adjust gradient and make step
+            # Adjust gradient and make step
             adj_theta_0_update = theta_0_update / (self.fudge_factor + torch.sqrt(self.historical_grad_theta_0))
             self.lt.theta_0 = self.lt.theta_0 + self.step_size * adj_theta_0_update
 
@@ -1411,8 +1421,8 @@ class DistributionMover(nn.Module):
         destination[prefix + 'particles'] = self.particles if keep_vars else self.particles.data
         destination[prefix + 'historical_grad'] = self.historical_grad if keep_vars else self.historical_grad.data
         if self.use_latent:
-            destination[
-                prefix + 'historical_grad_theta_0'] = self.historical_grad_theta_0 if keep_vars else self.historical_grad_theta_0.data
+            destination[prefix + 'historical_grad_theta_0'] = (self.historical_grad_theta_0 if keep_vars
+                                                               else self.historical_grad_theta_0.data)
             self.lt.state_dict(destination, prefix + 'lt' + '.', keep_vars=keep_vars)
         destination[prefix + 'step_size'] = self.step_size
         destination[prefix + 'iter'] = self.iter
@@ -1452,7 +1462,7 @@ class LRStrategy:
             self.step_size *= self.factor
 
 
-### Add some methods to nn.Sequential to make code clear
+# Add some methods to nn.Sequential to make code clear
 
 setattr(nn.Sequential, "numel", DistributionMover.numel)
 setattr(nn.Sequential, "calc_log_prior", DistributionMover.calc_log_prior_net)
@@ -1465,29 +1475,29 @@ def train(dm,
           checkpoint_file_name=None, plots_file_name=None, log_file_name=None,
           n_warmup_epochs=16, n_previous=10
           ):
-    ### Get all y_test in one tensor
+    # Get all y_test in one tensor
     y_test_all = torch.tensor([], dtype=torch.int64, device=device)
     for _, y_test in dataloader_test:
         y_test = y_test.to(device=device)
         y_test_all = torch.cat([y_test_all, y_test.data.detach().clone()], dim=0)
-    ### WARNING: May be incorrect if output features of dm.net != n_classes
+    # WARNING: May be incorrect if output features of dm.net != n_classes
     n_classes = len(dataloader_train.dataset.class_nums)
 
-    ### Train loss/accuracy
+    # Train loss/accuracy
     train_losses = []
     train_accs = []
-    ### Test loss/accuracy
+    # Test loss/accuracy
     test_losses = []
     test_accs = []
-    ### Mean loss/accuracy from @n_warmup_epochs to current epoch
+    # Mean loss/accuracy from @n_warmup_epochs to current epoch
     test_losses_mean = []
     test_accs_mean = []
-    predictions_test_cummulative = torch.zeros([1, 1], dtype=t_type, device=device)
-    ### Mean loss/accuracy from (current epoch - n_previous)  to current epoch
+    predictions_test_cumulative = torch.zeros([1, 1], dtype=t_type, device=device)
+    # Mean loss/accuracy from (current epoch - n_previous)  to current epoch
     test_losses_mean_previous = []
     test_accs_mean_previous = []
     predictions_test_previous = torch.zeros([n_previous, y_test_all.shape[0], n_classes], dtype=t_type, device=device)
-    ### Index of 'oldest' element in predictions_test_previous
+    # Index of 'oldest' element in predictions_test_previous
     pointer_to_the_back = 0
 
     if log_file_name is not None:
@@ -1495,17 +1505,18 @@ def train(dm,
         log_file.write('\rNew run of training.\r')
         log_file.close()
 
+    epoch = start_epoch
     try:
         for epoch in range(start_epoch, end_epoch):
             epoch_since_start = epoch - start_epoch
 
-            ### One update of particles via all dataloader_train
-            for X, y in dataloader_train:
-                X = X.double().to(device=device).view(X.shape[0], -1)
+            # One update of particles via all dataloader_train
+            for x, y in dataloader_train:
+                x = x.double().to(device=device).view(x.shape[0], -1)
                 y = y.to(device=device)
                 burn_in_coeff = max(1. - (1. - 1.) / 20. * epoch, 1.)
                 dm.update_latent_net(h_type=0, kernel_type='rbf', p=None,
-                                     X_batch=X, y_batch=y,
+                                     x_batch=x, y_batch=y,
                                      train_size=len(dataloader_train.dataset),
                                      step_size=lr_str.step_size,
                                      move_theta_0=move_theta_0,
@@ -1513,14 +1524,14 @@ def train(dm,
                                      epoch=epoch
                                      )
 
-            ### Evaluate cross entropy and accuracy over dataloader_train
+            # Evaluate cross entropy and accuracy over dataloader_train
             train_loss = 0.
             train_acc = 0.
-            for X_train, y_train in dataloader_train:
-                X_train = X_train.double().to(device=device).view(X.shape[0], -1)
+            for x_train, y_train in dataloader_train:
+                x_train = x_train.double().to(device=device).view(x_train.shape[0], -1)
                 y_train = y_train.to(device=device)
 
-                net_pred = dm.predict_net(X_train, inference=True)
+                net_pred = dm.predict_net(x_train, inference=True)
                 y_pred = torch.argmax(net_pred, dim=1)
 
                 train_loss -= torch.sum(torch.gather(net_pred, 1, y_train.view(-1, 1)))
@@ -1528,16 +1539,16 @@ def train(dm,
             train_loss /= (len(dataloader_train.dataset) + 0.)
             train_acc /= (len(dataloader_train.dataset) + 0.)
 
-            ### Evaluate cross entropy and accuracy over dataloader_test
+            # Evaluate cross entropy and accuracy over dataloader_test
             test_loss = 0.
             test_acc = 0.
             predictions_test_current = torch.tensor([], dtype=t_type, device=device)
-            for X_test, y_test in dataloader_test:
-                X_test = X_test.double().to(device=device).view(X.shape[0], -1)
+            for x_test, y_test in dataloader_test:
+                x_test = x_test.double().to(device=device).view(x.shape[0], -1)
                 y_test = y_test.to(device=device)
 
-                ### Get output of net before Softmax, mean and log, Shape = [n_particles, batch_size, output_features]
-                net_pred_pure = dm.predict_net(X_test, inference=False)
+                # Get output of net before Softmax, mean and log, Shape = [n_particles, batch_size, output_features]
+                net_pred_pure = dm.predict_net(x_test, inference=False)
                 net_pred_pure = torch.mean(torch.nn.Softmax(dim=2)(net_pred_pure), dim=0)
                 predictions_test_current = torch.cat([predictions_test_current, net_pred_pure.data.detach().clone()],
                                                      dim=0)
@@ -1550,16 +1561,16 @@ def train(dm,
             test_loss /= (len(dataloader_test.dataset) + 0.)
             test_acc /= (len(dataloader_test.dataset) + 0.)
 
-            ### Evaluate cross entropy and accuracy over dataloader_test using
-            ### all predictions from previous (@epoch_since_start - @n_warmup_epochs) epochs
+            # Evaluate cross entropy and accuracy over dataloader_test using
+            # all predictions from previous (@epoch_since_start - @n_warmup_epochs) epochs
             test_loss_mean = 0.
             test_acc_mean = 0.
             if epoch_since_start >= n_warmup_epochs:
-                predictions_test_cummulative = (
-                        predictions_test_cummulative * (epoch_since_start - n_warmup_epochs) / (
+                predictions_test_cumulative = (
+                        predictions_test_cumulative * (epoch_since_start - n_warmup_epochs) / (
                             epoch_since_start - n_warmup_epochs + 1.) +
                         predictions_test_current / (epoch_since_start - n_warmup_epochs + 1.))
-                log_predictions_test = torch.log(predictions_test_cummulative)
+                log_predictions_test = torch.log(predictions_test_cumulative)
                 y_pred_all = torch.argmax(log_predictions_test, dim=1)
 
                 test_loss_mean = -torch.sum(torch.gather(log_predictions_test, 1, y_test_all.view(-1, 1)))
@@ -1567,8 +1578,8 @@ def train(dm,
                 test_loss_mean /= (len(dataloader_test.dataset) + 0.)
                 test_acc_mean /= (len(dataloader_test.dataset) + 0.)
 
-            ### Evaluate cross entropy and accuracy over dataloader_test using
-            ### all predictions from previous @n_previous epochs
+            # Evaluate cross entropy and accuracy over dataloader_test using
+            # all predictions from previous @n_previous epochs
             test_loss_mean_previous = 0.
             test_acc_mean_previous = 0.
             predictions_test_previous[pointer_to_the_back] = predictions_test_current
@@ -1584,7 +1595,7 @@ def train(dm,
                 test_loss_mean_previous /= (len(dataloader_test.dataset) + 0.)
                 test_acc_mean_previous /= (len(dataloader_test.dataset) + 0.)
 
-            ### Append evaluated losses and accuracies
+            # Append evaluated losses and accuracies
             train_losses.append(train_loss.data[0].cpu().numpy())
             train_accs.append(train_acc.data[0].cpu().numpy())
             test_losses.append(test_loss.data[0].cpu().numpy())
@@ -1602,7 +1613,7 @@ def train(dm,
                 test_losses_mean_previous.append(None)
                 test_accs_mean_previous.append(None)
 
-            ### Print log into console and file
+            # Print log into console and file
             if epoch % n_epochs_log == 0:
                 sys.stdout.write(
                     ('\nEpoch {0}... \t Step Size {1:.3f}\t Kernel factor: {2:.3f}\t Burn-in Coeff: {3:.3f}' +
@@ -1629,7 +1640,7 @@ def train(dm,
             if epoch % n_epochs_save == 0 and epoch > start_epoch and checkpoint_file_name is not None:
                 torch.save(dm.state_dict(), checkpoint_file_name.format(start_epoch, epoch))
 
-            ### Update step_size
+            # Update step_size
             lr_str.step()
 
     except KeyboardInterrupt:
