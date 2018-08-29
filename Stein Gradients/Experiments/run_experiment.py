@@ -62,27 +62,43 @@ elif config.net_arc == 'fc-18-14':
 else:
     raise RuntimeError
 
-data_distr = ClassificationDistribution(config.n_particles)
-dm = DistributionMover(task='net_class',
-                       n_particles=config.n_particles,
-                       n_hidden_dims=config.n_hidden_dims,
-                       use_latent=config.use_latent,
-                       net=net,
-                       data_distribution=data_distr)
-lr_str = LRStrategy(step_size=0.03, factor=0.97, n_epochs=1, patience=80)
-
 own_name = config.experiment_name
 version = args.version if args.version > 0 else config.version
 checkpoint_file_name = './Checkpoints/' + 'e{0}-{1}_' + own_name + '.pth'
 plots_file_name = './Plots/' + 'e{0}-{1}_' + own_name + '.png'
 log_file_name = './Logs/' + own_name + '.txt'
-if os.path.exists(checkpoint_file_name.format(0, version)):
+
+data_distr = ClassificationDistribution(config.n_particles)
+lr_str = LRStrategy(step_size=0.03, factor=0.97, n_epochs=1, patience=80)
+
+# If checkpoint exists do not create and perform any unnecessary computations in DistributionMover class
+use_checkpoint = os.path.exists(checkpoint_file_name.format(0, version))
+if use_checkpoint:
+    dm = DistributionMover(
+        task='net_class',
+        n_particles=config.n_particles,
+        n_hidden_dims=config.n_hidden_dims,
+        use_latent=config.use_latent,
+        net=net,
+        data_distribution=data_distr,
+        dummy=True
+    )
     dm.load_state_dict(torch.load(checkpoint_file_name.format(0, version)))
     lr_str.step_size = dm.step_size
     lr_str.iter = dm.epoch + 1
+else:
+    dm = DistributionMover(
+        task='net_class',
+        n_particles=config.n_particles,
+        n_hidden_dims=config.n_hidden_dims,
+        use_latent=config.use_latent,
+        net=net,
+        data_distribution=data_distr,
+        dummy=False
+    )
 
 try:
-    if config.use_initializer:
+    if config.use_initializer and not use_checkpoint:
         initializer = torch.load(config.initializer_name)
         if config.init_theta_0:
             if 'particles' in initializer.keys():

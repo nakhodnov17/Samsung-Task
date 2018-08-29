@@ -638,7 +638,7 @@ class LinearTransform:
         Class for various linear transformations
     """
 
-    def __init__(self, n_dims, n_hidden_dims, use_identity=False, normalize=False, A=None, theta_0=None):
+    def __init__(self, n_dims, n_hidden_dims, use_identity=False, normalize=False, A=None, theta_0=None, dummy=False):
         """
         Args:
             n_dims (int): dimension of the space
@@ -651,13 +651,15 @@ class LinearTransform:
             theta_0 (1D array_like, None): Initial value for bias
                 If None then matrix will be sampled from uniform distribution
                 Default: None
+            dummy (bool):
+                If True then matrixes initialization ommited and class should be loaded via load_state_dict
         """
         self.n_dims = n_dims
         self.n_hidden_dims = n_hidden_dims
         self.use_identity = use_identity
         self.normalize = normalize
 
-        if self.use_identity:
+        if self.use_identity or dummy:
             return
 
         self.A = A
@@ -744,14 +746,14 @@ class LinearTransform:
         return destination
 
     def load_state_dict(self, state_dict, prefix=''):
-        self.A.copy_(state_dict[prefix + 'A'])
-        self.theta_0.copy_(state_dict[prefix + 'theta_0'])
         self.__init__(state_dict[prefix + 'n_dims'],
                       state_dict[prefix + 'n_hidden_dims'],
                       state_dict[prefix + 'use_identity'],
                       state_dict[prefix + 'normalize'],
-                      self.A, self.theta_0
-                      )
+                      state_dict[prefix + 'A'],
+                      state_dict[prefix + 'theta_0'],
+                      dummy=False
+                     )
 
 
 class RegressionDistribution(nn.Module):
@@ -907,8 +909,8 @@ class DistributionMover(nn.Module):
                  n_hidden_dims=None,
                  use_latent=False,
                  net=None,
-                 precomputed_params=None,
-                 data_distribution=None
+                 data_distribution=None,
+                 dummy=False
                  ):
         super(DistributionMover, self).__init__()
         """
@@ -926,8 +928,9 @@ class DistributionMover(nn.Module):
             use_latent (bool): If set to True, Subspace Stein is used
             acr (list): List contains architecture of object which is used to 
                         make predictions (for 'net_reg' and' net_class' tasks)
-            precomputed_params (1D array_like): Precomputed parameters, which will be used for particles initialization
             data_distribution (callable): computes probability over data p(D|w) (for 'net_reg' and' net_class' tasks)
+            dummy (bool): 
+                If True then no initialization performed and class should be loaded via load_state_dict
         """
 
         self.task = task
@@ -939,7 +942,6 @@ class DistributionMover(nn.Module):
         self.n_hidden_dims = n_hidden_dims
         self.use_latent = use_latent
         self.net = net
-        self.precomputed_params = precomputed_params
         self.data_distribution = data_distribution
 
         if self.task == 'net_reg' or self.task == 'net_class':
@@ -952,7 +954,8 @@ class DistributionMover(nn.Module):
             [self.n_hidden_dims, self.n_particles],
             dtype=t_type,
             requires_grad=False,
-            device=device).uniform_(-2., 2.)
+            device=device
+        ).uniform_(-2., 2.)
 
         # Class for performing linear transformations
         if self.use_latent:
@@ -960,19 +963,17 @@ class DistributionMover(nn.Module):
                 n_dims=self.n_dims,
                 n_hidden_dims=self.n_hidden_dims,
                 use_identity=False,
-                normalize=True
+                normalize=True,
+                dummy=dummy
             )
         else:
             self.lt = LinearTransform(
                 n_dims=self.n_dims,
                 n_hidden_dims=self.n_hidden_dims,
                 use_identity=True,
-                normalize=True
+                normalize=True,
+                dummy=dummy
             )
-
-        if self.precomputed_params is not None:
-            self.particles = self.lt.inverse_transform(
-                self.precomputed_params.unsqueeze(1).expand(self.n_dims, self.n_particles))
 
         # Functions of probability density of target distribution
         if self.net is None:
@@ -1645,7 +1646,7 @@ def train(dm,
 
     except KeyboardInterrupt:
         pass
-    if plot_graphs:
+    if plot_graphs and plots_file_name is not  None:
         print_plots([[train_losses, test_losses, test_losses_mean, test_losses_mean_previous],
                      [train_accs, test_accs, test_accs_mean, test_accs_mean_previous]],
                     [['Epochs', ''],

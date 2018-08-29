@@ -71,22 +71,32 @@ transform = transforms.Compose([
 dataset_train = MNIST_Class_Selection('.', train=True, download=True, transform=transform)
 dataset_test = MNIST_Class_Selection('.', train=False, transform=transform)
 
-dataloader_train = DataLoader(dataset_train, batch_size=100, shuffle=True)
 dataloader_test = DataLoader(dataset_test, batch_size=100, shuffle=False)
 
-net = nn.Sequential(
-    nn.Linear(28 * 28, 300),
-    nn.Tanh(),
-    nn.Linear(300, 100),
-    nn.Tanh(),
-    nn.Linear(100, 10)
-).to(device=device).double()
+n_models = 5
+dataloaders_train = []
+nets = []
+optims = []
+for _ in range(n_models):
+    dataloaders_train.append(
+        DataLoader(dataset_train, batch_size=100, shuffle=True)
+    )
+    nets.append(
+        nn.Sequential(
+            nn.Linear(28 * 28, 300),
+            nn.Tanh(),
+            nn.Linear(300, 100),
+            nn.Tanh(),
+            nn.Linear(100, 10)
+        ).to(device=device).double()
+    )
+    optims.append(
+        torch.optim.Adam(nets[-1].parameters())
+    )
 
-optim = torch.optim.Adam(net.parameters())
-
-checkpoint_file_name = './Checkpoints/' + 'e{0}-{1}_' + 'ml_est' + '.pth'
-plots_file_name = './Plots/' + 'e{0}-{1}_' + 'ml_est' + '.png'
-log_file_name = './Logs/' + 'ml_est' + '.txt'
+checkpoint_file_name = './Checkpoints/' + 'e{0}-{1}_' + 'ml_ensemble' + '.pth'
+plots_file_name = './Plots/' + 'e{0}-{1}_' + 'ml_ensemble' + '.png'
+log_file_name = './Logs/' + 'ml_ensemble' + '.txt'
 if log_file_name is not None:
     log_file = open(log_file_name, 'a')
     log_file.write('\rNew run of training.\r')
@@ -99,34 +109,37 @@ train_accs = []
 test_losses = []
 test_accs = []
 best_test_acc = 0.
+epoch = 0
 try:
     for epoch in range(200):
         # One update of particles via all dataloader_train
-        for x, y in dataloader_train:
-            x = x.double().to(device=device).view(x.shape[0], -1)
-            y = y.to(device=device)
+        for idx in range(n_models):
+            for x, y in dataloaders_train[idx]:
+                x = x.double().to(device=device).view(x.shape[0], -1)
+                y = y.to(device=device)
 
-            predicts = net(x)
-            loss = torch.nn.CrossEntropyLoss()(predicts, y)
+                predicts = nets[idx](x)
+                loss = torch.nn.CrossEntropyLoss()(predicts, y)
 
-            optim.zero_grad()
-            loss.backward()
-            optim.step()
+                optims[idx].zero_grad()
+                loss.backward()
+                optims[idx].step()
 
         # Evaluate cross entropy and accuracy over dataloader_train
         train_loss = 0.
         train_acc = 0.
-        for x_train, y_train in dataloader_train:
+        for x_train, y_train in dataloaders_train[0]:
             x_train = x_train.double().to(device=device).view(x_train.shape[0], -1)
             y_train = y_train.to(device=device)
 
-            predicts = net(x_train)
+            predicts = torch.cat([net(x_train).unsqueeze(0) for net in nets])
+            predicts = torch.mean(nn.Softmax(dim=2)(predicts), dim=0)
 
-            y_pred = torch.argmax(nn.Softmax()(predicts), dim=1)
+            y_pred = torch.argmax(predicts, dim=1)
             train_loss += nn.CrossEntropyLoss(reduction='sum')(predicts, y_train)
             train_acc += torch.sum(y_pred == y_train).float()
-        train_loss /= (len(dataloader_train.dataset) + 0.)
-        train_acc /= (len(dataloader_train.dataset) + 0.)
+        train_loss /= (len(dataloaders_train[0].dataset) + 0.)
+        train_acc /= (len(dataloaders_train[0].dataset) + 0.)
 
         # Evaluate cross entropy and accuracy over dataloader_test
         test_loss = 0.
@@ -135,9 +148,10 @@ try:
             x_test = x_test.double().to(device=device).view(x_test.shape[0], -1)
             y_test = y_test.to(device=device)
 
-            predicts = net(x_test)
+            predicts = torch.cat([net(x_test).unsqueeze(0) for net in nets])
+            predicts = torch.mean(nn.Softmax(dim=2)(predicts), dim=0)
 
-            y_pred = torch.argmax(nn.Softmax()(predicts), dim=1)
+            y_pred = torch.argmax(predicts, dim=1)
             test_loss += nn.CrossEntropyLoss(reduction='sum')(predicts, y_test)
             test_acc += torch.sum(y_pred == y_test).double()
         test_loss /= (len(dataloader_test.dataset) + 0.)
@@ -174,7 +188,10 @@ try:
 
         if test_accs[-1] > best_test_acc:
             best_test_acc = test_accs[-1]
-            torch.save(net.state_dict(), checkpoint_file_name.format(0, epoch))
+            state_dict = {}
+            for idx in range(n_models):
+                state_dict[idx] = nets[idx].state_dict()
+            torch.save(state_dict, checkpoint_file_name.format(0, epoch))
 
 except KeyboardInterrupt:
     pass
@@ -189,4 +206,7 @@ if plots_file_name is not None:
                 plots_file_name.format(0, 199)
                 )
 if checkpoint_file_name is not None:
-    torch.save(net.state_dict(), checkpoint_file_name.format(0, 199))
+    state_dict = {}
+    for idx in range(n_models):
+        state_dict[idx] = nets[idx].state_dict()
+    torch.save(state_dict, checkpoint_file_name.format(0, epoch))

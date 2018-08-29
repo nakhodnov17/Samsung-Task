@@ -17,8 +17,8 @@ experiments = [
     ('model_7', None),
     ('model_8', None),
     ('model_9', None),
-    ('model_10', None),  # 146 epochs
-    ('model_11', '#74FC74'),  # aka map estimate
+    ('model_10', None),         # 146 epochs
+    ('model_11', '#74FC74'),    # aka map estimate
     ('model_12', '#FCF567'),
     ('model_13', '#FCF567'),
     ('model_14', '#FCF567'),
@@ -31,7 +31,11 @@ experiments = [
     ('model_21', '#FCAC67'),
     ('model_22', '#FCAC67'),
     ('model_23', '#FCAC67'),
-    ('ml_est', None)     # ml estimation
+    ('model_24', None),
+    ('model_25', None),
+    ('model_26', None),
+    ('ml_est', '#FC6C67'),      # ml estimation
+    ('ml_ensemble', '#FC6C67')  # ensemble of 5 ml estimators
 ]
 
 column_names = [
