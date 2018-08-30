@@ -17,8 +17,8 @@ experiments = [
     ('model_7', None),
     ('model_8', None),
     ('model_9', None),
-    ('model_10', None),         # 146 epochs
-    ('model_11', '#74FC74'),    # aka map estimate
+    ('model_10', None),             # 146 epochs
+    ('model_11', '#74FC74'),        # aka map estimate
     ('model_12', '#FCF567'),
     ('model_13', '#FCF567'),
     ('model_14', '#FCF567'),
@@ -32,10 +32,15 @@ experiments = [
     ('model_22', '#FCAC67'),
     ('model_23', '#FCAC67'),
     ('model_24', None),
-    ('model_25', None),
-    ('model_26', None),
-    ('ml_est', '#FC6C67'),      # ml estimation
-    ('ml_ensemble', '#FC6C67')  # ensemble of 5 ml estimators
+    ('model_25', '#FCAC67'),
+    ('model_26', '#FCAC67'),
+    ('ml_est', '#FC6C67'),          # ml estimation
+    ('ml_ensemble', '#FC6C67'),     # ensemble of 5 ml estimators
+    ('model_30', '#FCAC67'),
+    ('model_31', '#FCAC67'),
+    ('model_28', '#FCAC67'),
+    ('model_27', '#FCAC67'),
+    ('model_29', '#FCAC67')
 ]
 
 column_names = [
@@ -49,6 +54,9 @@ column_names = [
     'use_latent',
     'n_hidden_dims',
     'n_epochs',
+    'h_type',
+    'kernel_type',
+    'p',
     'move_theta_0',
     'init_theta_0',
     'Loss (Train)',
@@ -138,6 +146,9 @@ for exp_name, _ in experiments:
                            config.use_latent,
                            config.n_hidden_dims,
                            config.n_epochs,
+                           config.h_type,
+                           config.kernel_type,
+                           config.p,
                            config.move_theta_0,
                            config.init_theta_0,
                            l_tr, l_t, l_tm, l_tmn,
@@ -175,10 +186,10 @@ for idx, result in enumerate(data):
 
 # Write head of the table
 for idx, name in enumerate(column_names):
-    worksheets[0].set_column(idx, idx, len(name))
+    worksheets[0].set_column(idx, idx, len(name) + 1)
     worksheets[0].write(0, idx, name)
 for idx, name in enumerate(squeezed_column_names):
-    worksheets[1].set_column(idx, idx, len(name))
+    worksheets[1].set_column(idx, idx, len(name) + 1)
     worksheets[1].write(0, idx, name)
 
 workbook.close()

@@ -127,5 +127,6 @@ train(dm=dm,
       n_epochs_save=config.n_epochs_save, n_epochs_log=config.n_epochs_log,
       move_theta_0=config.move_theta_0, plot_graphs=True, verbose=False,
       checkpoint_file_name=checkpoint_file_name, plots_file_name=plots_file_name, log_file_name=log_file_name,
-      n_warmup_epochs=config.n_warmup_epochs, n_previous=config.n_previous
+      n_warmup_epochs=config.n_warmup_epochs, n_previous=config.n_previous,
+      h_type=config.h_type, kernel_type=config.kernel_type, p=config.p
       )

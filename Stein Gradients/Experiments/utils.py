@@ -1135,7 +1135,7 @@ class DistributionMover(nn.Module):
             # kernel[i, j] = (1 + 1/h * ||A(theta`_i - theta`_j)||^2)^(p)
             kernel = torch.pow(self.one + self.one / self.h * sq_dists, p)
             # grad_kernel[i, j] = p/h * A(theta`_i - theta`_j) * kernel^((p - 1)/p)[i, j]
-            grad_kernel = p / self.h * torch.pow(kernel, (self.p - self.one) / p).unsqueeze(0) * diffs
+            grad_kernel = self.two * p / self.h * torch.pow(kernel, (p - self.one) / p).unsqueeze(0) * diffs
 
         return kernel, grad_kernel
 
@@ -1474,7 +1474,8 @@ def train(dm,
           lr_str, start_epoch, end_epoch, n_epochs_save=20, n_epochs_log=1,
           move_theta_0=False, plot_graphs=True, verbose=False,
           checkpoint_file_name=None, plots_file_name=None, log_file_name=None,
-          n_warmup_epochs=16, n_previous=10
+          n_warmup_epochs=16, n_previous=10,
+          h_type=0, kernel_type='rbf', p=None
           ):
     # Get all y_test in one tensor
     y_test_all = torch.tensor([], dtype=torch.int64, device=device)
@@ -1516,7 +1517,7 @@ def train(dm,
                 x = x.double().to(device=device).view(x.shape[0], -1)
                 y = y.to(device=device)
                 burn_in_coeff = max(1. - (1. - 1.) / 20. * epoch, 1.)
-                dm.update_latent_net(h_type=0, kernel_type='rbf', p=None,
+                dm.update_latent_net(h_type=h_type, kernel_type=kernel_type, p=p,
                                      x_batch=x, y_batch=y,
                                      train_size=len(dataloader_train.dataset),
                                      step_size=lr_str.step_size,

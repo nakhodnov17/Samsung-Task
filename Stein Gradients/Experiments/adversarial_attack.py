@@ -30,17 +30,17 @@ worksheets = [workbook.add_worksheet(), workbook.add_worksheet()]
 
 # Name and colour of the corresponding row
 experiments = [
-    # ('model_1', None),
-    # ('model_2', None),
-    # ('model_3', None),
-    # ('model_4', None),
-    # ('model_5', None),
-    # ('model_6', None),
-    # ('model_7', None),
-    # ('model_8', None),
-    # ('model_9', None),
-    # ('model_10', None),         # 146 epochs
-    ('model_11', '#74FC74'),    # aka map estimate
+    ('model_1', None),
+    ('model_2', None),
+    ('model_3', None),
+    ('model_4', None),
+    ('model_5', None),
+    ('model_6', None),
+    ('model_7', None),
+    ('model_8', None),
+    ('model_9', None),
+    ('model_10', 'A5A4A4'),         # 146 epochs
+    ('model_11', '#74FC74'),        # aka map estimate
     ('model_12', '#FCF567'),
     ('model_13', '#FCF567'),
     ('model_14', '#FCF567'),
@@ -56,8 +56,13 @@ experiments = [
     ('model_24', None),
     ('model_25', None),
     ('model_26', None),
-    ('ml_est', '#FC6C67'),      # ml estimation
-    ('ml_ensemble', '#FC6C67')  # ensemble of 5 ml estimators
+    ('ml_est', '#FC6C67'),          # ml estimation
+    ('ml_ensemble', '#FC6C67'),     # ensemble of 5 ml estimators
+    ('model_30', '#FCAC67'),
+    ('model_31', '#FCAC67'),
+    ('model_28', '#FCAC67'),
+    ('model_27', '#FCAC67'),
+    ('model_29', '#FCAC67')
 ]
 
 column_names = [
@@ -140,6 +145,26 @@ for exp_name, _ in experiments:
     config = importlib.import_module('Configs.config_' + exp_name)
     checkpoint_file_name = ('./Checkpoints/' + 'e{0}-{1}_' + config.experiment_name + '.pth').format(0, 199)
     if not os.path.exists(checkpoint_file_name):
+        data.append(
+            Result(
+                config.experiment_name,
+                config.dataset,
+                config.batch_size,
+                config.net_arc,
+                config.use_var_prior,
+                config.alpha,
+                config.n_particles,
+                config.use_latent,
+                config.n_hidden_dims,
+                config.n_epochs,
+                config.move_theta_0,
+                config.init_theta_0,
+                None, None, None,
+                None, None, None, None,
+                None, None,
+                config.comment
+            )
+        )
         continue
 
     print(exp_name)

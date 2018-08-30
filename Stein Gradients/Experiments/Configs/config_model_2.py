@@ -26,6 +26,9 @@ Params:
     move_theta_0 (bool): if True and use_latent == True then theta_0 in LinearTransform will be update
     n_warmup_epochs (int): specify number of epoch since that loss and accuracy will be averaged
     n_previous (int): specify number of epoch that loss/accuracy will be averaged over last @n_previous epochs
+    h_type (int, float): specify way to compute kernel factor
+    kernel_type (std)
+    p (double, None): power in rational kernel
     use_initializer (bool): if True then some fields may be initializer from checkpoint @initializer_name
     initializer_name (str): checkpoint name which is used for initialization
     init_theta_0 (bool): if True then use theta_0 from @initializer_name checkpoint
@@ -49,6 +52,9 @@ n_epochs_log = 1
 move_theta_0 = True
 n_warmup_epochs = 10
 n_previous = 6
+h_type = 0
+kernel_type = 'rbf'
+p = None
 use_initializer = False
 initializer_name = None
 init_theta_0 = False
