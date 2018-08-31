@@ -40,7 +40,9 @@ experiments = [
     ('model_31', '#FCAC67'),
     ('model_28', '#FCAC67'),
     ('model_27', '#FCAC67'),
-    ('model_29', '#FCAC67')
+    ('model_29', '#FCAC67'),
+    ('model_33', '#FCAC67'),
+    ('model_34', '#FCAC67')
 ]
 
 column_names = [

@@ -8,7 +8,7 @@ from collections import namedtuple
 
 use_cuda = False
 device = None
-os.environ["CUDA_VISIBLE_DEVICES"] = '4'
+os.environ["CUDA_VISIBLE_DEVICES"] = '2'
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
     use_cuda = True
@@ -62,7 +62,9 @@ experiments = [
     ('model_31', '#FCAC67'),
     ('model_28', '#FCAC67'),
     ('model_27', '#FCAC67'),
-    ('model_29', '#FCAC67')
+    ('model_29', '#FCAC67'),
+    ('model_33', '#FCAC67'),
+    ('model_34', '#FCAC67')
 ]
 
 column_names = [
